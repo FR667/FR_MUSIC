@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FR MUSIC - 專業頂級音樂平台</title>
+    <title id="page-title">FR MUSIC - 專業頂級音樂平台</title>
     <style>
         :root { 
             --bg-color: #050505; 
@@ -25,10 +25,16 @@
         .logo-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
         .brand { font-size: 1.35rem; font-weight: 700; letter-spacing: 0.5px; color: var(--text-main); }
         
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+
         /* 搜尋列 */
-        .search-box { background: #222; border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 10px; width: 280px; }
+        .search-box { background: #222; border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 10px; width: 260px; }
         .search-box input { background: none; border: none; color: #fff; outline: none; font-size: 0.9rem; width: 100%; }
         .search-box svg { width: 16px; height: 16px; fill: var(--text-secondary); }
+
+        .settings-icon-btn { background: #222; border: 1px solid var(--border-color); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+        .settings-icon-btn:hover { background: #333; }
+        .settings-icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* 主內容區 */
         .container { padding: 40px; max-width: 1100px; margin: auto; }
@@ -49,7 +55,7 @@
         .hero-info h2 { font-size: 2.2rem; margin: 0 0 10px 0; font-weight: 800; }
         .hero-info p { color: var(--text-secondary); margin: 0 0 20px 0; font-size: 0.95rem; }
         .hero-play-btn { background: var(--accent); color: #fff; border: none; padding: 12px 32px; border-radius: 24px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s, background 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-        .hero-play-btn:hover { transform: scale(1.05); background: #e01b33; }
+        .hero-play-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
         .hero-play-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
         h3 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; }
@@ -88,61 +94,35 @@
         .main-play-btn svg { width: 16px; height: 16px; fill: #000; }
 
         .progress-container { width: 100%; display: flex; align-items: center; gap: 12px; font-size: 0.75rem; color: var(--text-secondary); }
-        .progress-bar { flex-grow: 1; height: 4px; background: #4d4d4d; border-radius: 2px; cursor: pointer; position: relative; transition: height 0.1s; }
-        .progress-bar:hover { height: 6px; }
-        .progress-filled { height: 100%; background: var(--text-main); width: 0%; border-radius: 2px; }
+        
+        /* 流暢可拖曳進度條樣式 */
+        .progress-bar { flex-grow: 1; height: 6px; background: #4d4d4d; border-radius: 3px; cursor: pointer; position: relative; display: flex; align-items: center; }
+        .progress-bar:hover { height: 8px; }
+        .progress-filled { height: 100%; background: var(--text-main); width: 0%; border-radius: 3px; pointer-events: none; }
+        .progress-thumb { position: absolute; width: 12px; height: 12px; background: #fff; border-radius: 50%; top: 50%; transform: translate(-50%, -50%) scale(0); transition: transform 0.1s; pointer-events: none; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .progress-bar:hover .progress-thumb, .progress-bar.seeking .progress-thumb { transform: translate(-50%, -50%) scale(1); }
 
         .player-right { display: flex; align-items: center; justify-content: flex-end; gap: 14px; color: var(--text-secondary); }
         .volume-slider { width: 90px; accent-color: var(--text-main); cursor: pointer; }
 
         /* ==================== 蘋果風格全螢幕播放大視窗 ==================== */
         .now-playing-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #181818 0%, #050505 100%);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 40px 60px;
-            opacity: 0;
-            pointer-events: none;
+            z-index: 2000; display: flex; flex-direction: column; justify-content: space-between;
+            padding: 40px 60px; opacity: 0; pointer-events: none;
             transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             transform: translateY(100%);
         }
-        .now-playing-modal.open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
+        .now-playing-modal.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .modal-header { display: flex; justify-content: center; align-items: center; position: relative; }
         .collapse-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 10px; transition: color 0.2s; }
         .collapse-btn:hover { color: var(--text-main); }
         .collapse-btn svg { width: 32px; height: 32px; fill: currentColor; }
 
-        .modal-body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 70px;
-            max-width: 950px;
-            margin: auto;
-            width: 100%;
-        }
-        .modal-cover {
-            width: 340px;
-            height: 340px;
-            border-radius: 18px;
-            object-fit: cover;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.7);
-        }
-        .modal-info-panel {
-            display: flex;
-            flex-direction: column;
-            width: 420px;
-            gap: 24px;
-        }
+        .modal-body { display: flex; align-items: center; justify-content: center; gap: 70px; max-width: 950px; margin: auto; width: 100%; }
+        .modal-cover { width: 340px; height: 340px; border-radius: 18px; object-fit: cover; box-shadow: 0 24px 48px rgba(0,0,0,0.7); }
+        .modal-info-panel { display: flex; flex-direction: column; width: 420px; gap: 24px; }
         .modal-song-title { font-size: 2rem; font-weight: 800; color: var(--text-main); }
         .modal-song-artist { font-size: 1.05rem; color: var(--text-secondary); margin-top: 6px; }
 
@@ -152,6 +132,38 @@
         .modal-play-btn { background: var(--text-main); color: #000; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: transform 0.1s; }
         .modal-play-btn:hover { transform: scale(1.05); }
         .modal-play-btn svg { width: 26px; height: 26px; fill: #000; }
+
+        /* ==================== 設定面板 Modal ==================== */
+        .settings-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+            z-index: 3000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+        }
+        .settings-modal.open { opacity: 1; pointer-events: auto; }
+        .settings-content {
+            background: #181818; border: 1px solid var(--border-color); border-radius: 16px;
+            width: 420px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; }
+        .settings-header h3 { margin: 0; font-size: 1.25rem; }
+        .close-settings { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.2rem; }
+        .close-settings:hover { color: #fff; }
+        
+        .setting-group { display: flex; flex-direction: column; gap: 8px; }
+        .setting-group label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 600; }
+        .setting-group input, .setting-group select {
+            background: #222; border: 1px solid var(--border-color); padding: 10px 14px;
+            border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none;
+        }
+        .setting-group input[type="color"] { padding: 4px; height: 40px; cursor: pointer; width: 100%; }
+        
+        .settings-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+        .btn-secondary { background: #333; color: #fff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .btn-secondary:hover { background: #444; }
+        .btn-primary { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .btn-primary:hover { filter: brightness(1.1); }
 
         footer { text-align: center; color: var(--text-secondary); margin-top: 40px; font-size: 0.8rem; letter-spacing: 0.5px; }
 
@@ -174,12 +186,17 @@
 <!-- 頂部導覽列 -->
 <nav>
     <div class="nav-left">
-        <img src="https://i.ibb.co/m54LF470/Background-Eraser-20260816-214356376.png" class="logo-img" alt="FR MUSIC Logo">
-        <div class="brand">FR MUSIC</div>
+        <img src="https://i.ibb.co/m54LF470/Background-Eraser-20260816-214356376.png" class="logo-img" alt="Logo">
+        <div class="brand" id="brand-title">FR MUSIC</div>
     </div>
-    <div class="search-box">
-        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        <input type="text" id="search-input" placeholder="搜尋歌曲..." oninput="filterSongs(this.value)">
+    <div class="nav-right">
+        <div class="search-box">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="search-input" placeholder="搜尋歌曲..." oninput="filterSongs(this.value)">
+        </div>
+        <button class="settings-icon-btn" onclick="openSettings()" title="網站設置">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        </button>
     </div>
 </nav>
 
@@ -191,7 +208,7 @@
         <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" class="hero-thumb" alt="焦點專輯">
         <div class="hero-info">
             <p style="text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; color: var(--accent); font-weight: 700;">今日焦點推薦</p>
-            <h2>FR 精選旗艦專輯</h2>
+            <h2 id="banner-title">FR 精選旗艦專輯</h2>
             <p>感受最高音質的音樂饗宴，立即播放享受沈浸式聆聽體驗。</p>
             <button class="hero-play-btn" onclick="playSong(0)">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -201,9 +218,7 @@
     </div>
 
     <h3>全部歌曲</h3>
-    <div class="song-list" id="song-list-container">
-        <!-- 動態產生列表 -->
-    </div>
+    <div class="song-list" id="song-list-container"></div>
 </div>
 
 <!-- 底部播放控制列 -->
@@ -237,8 +252,9 @@
 
         <div class="progress-container">
             <span id="current-time">0:00</span>
-            <div class="progress-bar" id="progress-container" onclick="setProgress(event)">
+            <div class="progress-bar" id="progress-bar">
                 <div class="progress-filled" id="progress-filled"></div>
+                <div class="progress-thumb" id="progress-thumb"></div>
             </div>
             <span id="duration-time">0:00</span>
         </div>
@@ -246,7 +262,7 @@
     
     <div class="player-right">
         <svg style="width:18px;height:18px;fill:currentColor;" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
+        <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
     </div>
 </div>
 
@@ -270,8 +286,9 @@
             <div class="modal-controls-area">
                 <div class="progress-container">
                     <span id="modal-current-time">0:00</span>
-                    <div class="progress-bar" id="modal-progress-container" onclick="setProgress(event)">
+                    <div class="progress-bar" id="modal-progress-bar">
                         <div class="progress-filled" id="modal-progress-filled"></div>
+                        <div class="progress-thumb" id="modal-progress-thumb"></div>
                     </div>
                     <span id="modal-duration-time">0:00</span>
                 </div>
@@ -288,6 +305,37 @@
     </div>
     
     <footer>&copy; 2026 FR科技公司 版權所有</footer>
+</div>
+
+<!-- ==================== 設定面板 Modal ==================== -->
+<div class="settings-modal" id="settings-modal">
+    <div class="settings-content">
+        <div class="settings-header">
+            <h3>⚙️ 網站個人化設置</h3>
+            <button class="close-settings" onclick="closeSettings()">&times;</button>
+        </div>
+        <div class="setting-group">
+            <label>網站標題 / 品牌名稱</label>
+            <input type="text" id="setting-brand" placeholder="例如：我的專屬音樂庫">
+        </div>
+        <div class="setting-group">
+            <label>主色調色彩 (Accent Color)</label>
+            <input type="color" id="setting-accent" value="#fa243c">
+        </div>
+        <div class="setting-group">
+            <label>預設音量大小</label>
+            <select id="setting-volume">
+                <option value="1">100% (最大)</option>
+                <option value="0.75">75%</option>
+                <option value="0.5">50% (適中)</option>
+                <option value="0.25">25% (安靜)</option>
+            </select>
+        </div>
+        <div class="settings-actions">
+            <button class="btn-secondary" onclick="resetSettings()">恢復預設</button>
+            <button class="btn-primary" onclick="saveSettings()">儲存設置</button>
+        </div>
+    </div>
 </div>
 
 <audio id="audio-player"></audio>
@@ -316,10 +364,52 @@
     const durationTimeEl = document.getElementById('duration-time');
     const modalCurrentTimeEl = document.getElementById('modal-current-time');
     const modalDurationTimeEl = document.getElementById('modal-duration-time');
-    const progressContainer = document.getElementById('progress-container');
 
     const playSvg = '<path d="M8 5v14l11-7z"/>';
     const pauseSvg = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
+    // 載入本地儲存設定 (LocalStorage)
+    function loadUserSettings() {
+        const saved = JSON.parse(localStorage.getItem('fr_music_settings'));
+        if (saved) {
+            document.getElementById('brand-title').innerText = saved.brandName || "FR MUSIC";
+            document.getElementById('page-title').innerText = (saved.brandName || "FR MUSIC") + " - 專業頂級音樂平台";
+            document.getElementById('banner-title').innerText = (saved.brandName || "FR") + " 精選旗艦專輯";
+            document.documentElement.style.setProperty('--accent', saved.accentColor || "#fa243c");
+            audio.volume = saved.volume !== undefined ? saved.volume : 1;
+            document.getElementById('volume-slider').value = audio.volume;
+
+            // 同步表單值
+            document.getElementById('setting-brand').value = saved.brandName || "FR MUSIC";
+            document.getElementById('setting-accent').value = saved.accentColor || "#fa243c";
+            document.getElementById('setting-volume').value = saved.volume !== undefined ? saved.volume : 1;
+        }
+    }
+    loadUserSettings();
+
+    function saveSettings() {
+        const brandName = document.getElementById('setting-brand').value.trim() || "FR MUSIC";
+        const accentColor = document.getElementById('setting-accent').value;
+        const volume = parseFloat(document.getElementById('setting-volume').value);
+
+        const settings = { brandName, accentColor, volume };
+        localStorage.setItem('fr_music_settings', JSON.stringify(settings));
+
+        loadUserSettings();
+        closeSettings();
+    }
+
+    function resetSettings() {
+        localStorage.removeItem('fr_music_settings');
+        document.getElementById('setting-brand').value = "FR MUSIC";
+        document.getElementById('setting-accent').value = "#fa243c";
+        document.getElementById('setting-volume').value = "1";
+        loadUserSettings();
+        closeSettings();
+    }
+
+    function openSettings() { document.getElementById('settings-modal').classList.add('open'); }
+    function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
 
     function renderList(songsToRender = playlist) {
         const listContainer = document.getElementById('song-list-container');
@@ -397,21 +487,19 @@
 
     function toggleShuffle() {
         isShuffle = !isShuffle;
-        const btns = document.querySelectorAll('#shuffle-btn');
-        btns.forEach(btn => btn.classList.toggle('active', isShuffle));
+        document.querySelectorAll('#shuffle-btn').forEach(b => b.classList.toggle('active', isShuffle));
     }
 
     function toggleRepeat() {
         isRepeat = !isRepeat;
-        const btns = document.querySelectorAll('#repeat-btn');
-        btns.forEach(btn => btn.classList.toggle('active', isRepeat));
+        document.querySelectorAll('#repeat-btn').forEach(b => b.classList.toggle('active', isRepeat));
     }
 
+    // 播放進度更新
     audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
+        if (audio.duration && !isDragging) {
             const percent = (audio.currentTime / audio.duration) * 100;
-            progressFilled.style.width = percent + '%';
-            modalProgressFilled.style.width = percent + '%';
+            updateProgressUI(percent);
             
             const formattedCurrent = formatTime(audio.currentTime);
             const formattedDuration = formatTime(audio.duration);
@@ -423,12 +511,64 @@
         }
     });
 
-    function setProgress(e) {
-        if (!audio.duration) return;
-        const width = progressContainer.clientWidth;
-        const clickX = e.offsetX;
-        audio.currentTime = (clickX / width) * audio.duration;
+    function updateProgressUI(percent) {
+        progressFilled.style.width = percent + '%';
+        modalProgressFilled.style.width = percent + '%';
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+            const thumb = bar.querySelector('.progress-thumb');
+            if(thumb) thumb.style.left = percent + '%';
+        });
     }
+
+    // 支援流暢的按住拖曳進度條 (滑鼠與觸控)
+    let isDragging = false;
+
+    function setupSeekBar(barId) {
+        const bar = document.getElementById(barId);
+        if(!bar) return;
+
+        const getPercent = (e) => {
+            const rect = bar.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            let percent = (clientX - rect.left) / rect.width;
+            return Math.max(0, Math.min(1, percent));
+        };
+
+        const onStart = (e) => {
+            if (!audio.duration) return;
+            isDragging = true;
+            bar.classList.add('seeking');
+            const percent = getPercent(e);
+            updateProgressUI(percent * 100);
+        };
+
+        const onMove = (e) => {
+            if (!isDragging || !audio.duration) return;
+            const percent = getPercent(e);
+            updateProgressUI(percent * 100);
+            currentTimeEl.innerText = formatTime(percent * audio.duration);
+            modalCurrentTimeEl.innerText = formatTime(percent * audio.duration);
+        };
+
+        const onEnd = (e) => {
+            if (!isDragging || !audio.duration) return;
+            isDragging = false;
+            bar.classList.remove('seeking');
+            const percent = getPercent(e.changedTouches ? e.changedTouches[0] : e);
+            audio.currentTime = percent * audio.duration;
+        };
+
+        bar.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        bar.addEventListener('touchstart', onStart);
+        window.addEventListener('touchmove', onMove);
+        window.addEventListener('touchend', onEnd);
+    }
+
+    setupSeekBar('progress-bar');
+    setupSeekBar('modal-progress-bar');
 
     function setVolume(val) {
         audio.volume = val;
@@ -441,19 +581,11 @@
     }
 
     audio.addEventListener('ended', () => {
-        if (isRepeat) {
-            audio.play();
-        } else {
-            nextSong();
-        }
+        if (isRepeat) { audio.play(); } else { nextSong(); }
     });
 
-    function openModal() {
-        document.getElementById('now-playing-modal').classList.add('open');
-    }
-    function closeModal() {
-        document.getElementById('now-playing-modal').classList.remove('open');
-    }
+    function openModal() { document.getElementById('now-playing-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('now-playing-modal').classList.remove('open'); }
 </script>
 
 </body>

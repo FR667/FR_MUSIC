@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">FR MUSIC - 專業音訊串流平台</title>
+    <title id="page-title">FR MUSIC - 音訊串流平台</title>
     <style>
         :root { 
             --bg-color: #050505; 
@@ -254,37 +254,42 @@
 <!-- 主內容區 -->
 <div class="container">
     
-    <!-- 英雄大看板 (Hero Banner) - 設為最新加入的 Dragon Circuit -->
+    <!-- 英雄大看板 (Hero Banner) - 對應索引 0 (Dragon Circuit) -->
     <div class="hero-banner">
         <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" class="hero-thumb" alt="焦點專輯">
         <div class="hero-info">
             <p style="text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.75rem; color: var(--accent); font-weight: 700;">🔥 最新熱門焦點單曲</p>
             <h2 id="banner-title">Dragon Circuit</h2>
             <p>享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。</p>
-            <button class="hero-play-btn" onclick="playSong(3)">
+            <button class="hero-play-btn" onclick="playSong(0)">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 立即播放
             </button>
         </div>
     </div>
 
-    <!-- 精選專輯推薦網格 -->
+    <!-- 精選專輯推薦網格（已修正各別對應的正確索引） -->
     <h3>精選推薦</h3>
     <div class="grid-section">
-        <div class="album-card" onclick="playSong(3)">
+        <div class="album-card" onclick="playSong(0)">
             <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" alt="Dragon Circuit">
             <div class="title">Dragon Circuit</div>
             <div class="desc">電子賽博 · 最新發行</div>
         </div>
-        <div class="album-card" onclick="playSong(0)">
+        <div class="album-card" onclick="playSong(1)">
             <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" alt="專輯1">
             <div class="title">FR 精選單曲 01</div>
             <div class="desc">電子音樂 · 官方發行</div>
         </div>
-        <div class="album-card" onclick="playSong(1)">
+        <div class="album-card" onclick="playSong(2)">
             <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" alt="專輯2">
             <div class="title">FR 精選單曲 02</div>
             <div class="desc">沉浸曲風 · 獨家釋出</div>
+        </div>
+        <div class="album-card" onclick="playSong(3)">
+            <img src="https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg" alt="專輯3">
+            <div class="title">FR 精選單曲 03</div>
+            <div class="desc">節奏重拍 · 獨家釋出</div>
         </div>
     </div>
 
@@ -421,7 +426,11 @@
 <audio id="audio-player"></audio>
 
 <script>
-    // 已更新播放清單，包含您提供的全新歌曲 Dragon Circuit
+    // 播放清單與對應索引
+    // 0: Dragon Circuit
+    // 1: FR 精選單曲 01
+    // 2: FR 精選單曲 02
+    // 3: FR 精選單曲 03
     const playlist = [
         { title: "Dragon Circuit", url: "https://res.cloudinary.com/mwnbak3n/video/upload/v1786890440/Dragon_Circuit.mp3" },
         { title: "FR 精選單曲 01", url: "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887399/bbd819d1-0744-43ac-97af-365f544b6958.wav" },

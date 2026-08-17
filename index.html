@@ -141,7 +141,6 @@
             width: 100%;
         }
 
-        /* 英雄區：用戶喜愛的音樂 (大卡片樣式) */
         .hero-banner {
             background: linear-gradient(135deg, #2b0c11 0%, #120507 100%);
             border-radius: 24px;
@@ -348,7 +347,7 @@
         .player-right { width: 300px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
         .volume-slider { width: 100px; accent-color: var(--text-primary); cursor: pointer; }
 
-        /* 全螢幕播放 Modal：動態高斯模糊專輯背景、滑順彈窗動畫 */
+        /* 全螢幕播放 Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -366,7 +365,6 @@
         }
         .modal-overlay.open { opacity: 1; pointer-events: auto; }
 
-        /* 動態模糊背景層 */
         .modal-blur-bg {
             position: absolute;
             top: -20px;
@@ -435,7 +433,6 @@
         }
         .close-modal-btn:hover { background: rgba(255,255,255,0.25); color: var(--text-primary); }
 
-        /* 左側封面區 */
         .carplay-left {
             position: relative;
             width: 320px;
@@ -451,20 +448,32 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
+        /* 升級版流暢等化器動畫 */
         .visualizer-bars {
             position: absolute;
-            bottom: -15px;
+            bottom: -18px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: flex-end;
-            gap: 6px;
-            height: 30px;
+            gap: 5px;
+            height: 35px;
             pointer-events: none;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 4px 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .v-bar { width: 5px; background: var(--accent); border-radius: 3px; height: 8px; transition: height 0.15s ease; }
+        .v-bar {
+            width: 4px;
+            background: var(--accent);
+            border-radius: 3px;
+            height: 6px;
+            transition: height 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 0 8px var(--accent);
+        }
 
-        /* 右側資訊與控制區 */
         .carplay-right {
             flex: 1;
             display: flex;
@@ -502,7 +511,6 @@
 
         #audio-player { display: none; }
 
-        /* 手機 RWD 適配避免破圖 */
         @media(max-width: 768px) {
             header { padding: 15px 20px; }
             .search-container { width: 200px; }
@@ -534,7 +542,7 @@
     <header>
         <div class="logo" id="brand-title" onclick="onLogoClick()">
             <img src="https://i.ibb.co/m54LF470/Background-Eraser-20260816-214356376.png" id="logo-img" alt="Logo">
-            <span>FR MUSIC</span>
+            <span id="nav-brand-text">FR MUSIC</span>
         </div>
         
         <div class="search-container">
@@ -542,11 +550,11 @@
             <input type="text" id="search-input" class="search-bar" placeholder="搜尋歌曲、曲風..." onfocus="showHotSearch()" onblur="hideHotSearch()" oninput="filterSongs(this.value)">
             
             <div class="search-dropdown" id="search-dropdown">
-                <div class="dropdown-title">熱門曲風標籤</div>
+                <div class="dropdown-title" id="dd-title">熱門曲風標籤</div>
                 <div class="tag-item" onclick="selectTag('電子賽博')">⚡ 電子賽博</div>
                 <div class="tag-item" onclick="selectTag('電子音樂')">🎧 電子音樂</div>
                 <div class="tag-item" onclick="selectTag('獨家釋出')">🔥 獨家釋出</div>
-                <div class="tag-item" onclick="resetSearchFilter()" style="color:var(--accent);">清除篩選條件</div>
+                <div class="tag-item" onclick="resetSearchFilter()" id="dd-clear" style="color:var(--accent);">清除篩選條件</div>
             </div>
         </div>
 
@@ -557,29 +565,26 @@
 
     <!-- 主要內容區 -->
     <main>
-        <!-- 英雄區：用戶喜愛的音樂焦點單曲 -->
         <div class="hero-banner" id="hero-banner-box">
             <img class="hero-cover" id="hero-cover" src="" alt="封面">
             <div class="hero-content">
-                <div class="hero-tag">🔥 用戶喜愛的音樂焦點單曲</div>
+                <div class="hero-tag" id="hero-tag-text">🔥 用戶喜愛的音樂焦點單曲</div>
                 <div class="hero-title" id="hero-title">載入中...</div>
                 <div class="hero-desc" id="hero-desc">享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。</div>
                 <button class="hero-btn" onclick="openModal(); playSong(heroSongIndex);">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    立即播放
+                    <span id="btn-play-now">立即播放</span>
                 </button>
             </div>
         </div>
 
-        <!-- 精選推薦區 -->
         <section style="margin-bottom: 40px;">
-            <h3>精選推薦</h3>
+            <h3 id="section-featured">精選推薦</h3>
             <div class="grid-section" id="grid-section-container"></div>
         </section>
 
-        <!-- 全部歌曲清單 -->
         <section>
-            <h3>全部歌曲清單</h3>
+            <h3 id="section-all-songs">全部歌曲清單</h3>
             <div class="song-list" id="song-list-container"></div>
         </section>
     </main>
@@ -633,7 +638,7 @@
         </div>
     </div>
 
-    <!-- 全螢幕播放 Modal：動態模糊背景與質感設計 -->
+    <!-- 全螢幕播放 Modal -->
     <div class="modal-overlay" id="now-playing-modal">
         <div class="modal-blur-bg" id="modal-blur-bg"></div>
         <div class="carplay-container">
@@ -642,8 +647,9 @@
             <div class="carplay-left">
                 <img class="carplay-cover" id="modal-cover" src="" alt="封面">
                 <div class="visualizer-bars" id="visualizer-bars">
-                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
                 </div>
             </div>
 
@@ -684,32 +690,39 @@
     <div class="modal-overlay" id="settings-modal" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);">
         <div class="carplay-container" style="max-width: 420px; display: block; text-align: left;">
             <button class="close-modal-btn" onclick="closeSettings()">×</button>
-            <h3 style="margin-bottom: 20px;">網站設定</h3>
+            <h3 id="settings-title" style="margin-bottom: 20px;">網站設定</h3>
             
             <div style="margin-bottom: 15px;">
-                <label style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">網站標題 / 品牌名稱</label>
-                <input type="text" id="setting-brand" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;" value="FR MUSIC">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">背景色調</label>
-                <select id="setting-bg-theme" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
-                    <option value="#050505">極黑沉浸 (預設)</option>
-                    <option value="#0f172a">深邃夜空藍</option>
-                    <option value="#180f2a">神祕暗夜紫</option>
-                    <option value="#1a0505">暗紅賽博風</option>
-                    <option value="#051a14">森林極光綠</option>
+                <label id="lbl-language" style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">語言 (Language)</label>
+                <select id="setting-language" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
+                    <option value="zh-TW">繁體中文</option>
+                    <option value="en">English (英文)</option>
+                    <option value="ja">日本語 (日文)</option>
+                    <option value="ko">한국어 (韓文)</option>
                 </select>
             </div>
 
             <div style="margin-bottom: 25px;">
-                <label style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">主色調色彩 (Accent Color)</label>
-                <input type="color" id="setting-accent" style="width:100%; height:40px; border:none; background:none; cursor:pointer;" value="#fa243c">
+                <label id="lbl-bgtheme" style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">背景色系 (12種風格)</label>
+                <select id="setting-bg-theme" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
+                    <option value="#050505">1. 極黑沉浸 (預設)</option>
+                    <option value="#0f172a">2. 深邃夜空藍</option>
+                    <option value="#180f2a">3. 神祕暗夜紫</option>
+                    <option value="#1a0505">4. 暗紅賽博風</option>
+                    <option value="#051a14">5. 森林極光綠</option>
+                    <option value="#1c1917">6. 溫暖木質灰</option>
+                    <option value="#221100">7. 琥珀黃金夜</option>
+                    <option value="#001524">8. 深海深藍</option>
+                    <option value="#1b1224">9. 迷幻紫羅蘭</option>
+                    <option value="#0d1b1e">10. 冰川極地青</option>
+                    <option value="#240e15">11. 暮光玫瑰紅</option>
+                    <option value="#141414">12. 碳纖極簡黑</option>
+                </select>
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:10px;">
-                <button onclick="closeSettings()" style="padding:9px 18px; background:#333; border:none; color:#fff; border-radius:8px; cursor:pointer;">取消</button>
-                <button onclick="saveSettings()" style="padding:9px 18px; background:var(--accent); border:none; color:#fff; border-radius:8px; cursor:pointer;">儲存設定</button>
+                <button id="btn-cancel" onclick="closeSettings()" style="padding:9px 18px; background:#333; border:none; color:#fff; border-radius:8px; cursor:pointer;">取消</button>
+                <button id="btn-save" onclick="saveSettings()" style="padding:9px 18px; background:var(--accent); border:none; color:#fff; border-radius:8px; cursor:pointer;">儲存設定</button>
             </div>
         </div>
     </div>
@@ -726,6 +739,94 @@
         let isRepeat = false;
 
         const JSON_URL = "https://raw.githubusercontent.com/FR667/FR_MUSIC/refs/heads/main/data.json";
+
+        // 多語系字典
+        const translations = {
+            'zh-TW': {
+                pageTitle: "FR MUSIC - 專業頂級音樂平台",
+                searchPlaceholder: "搜尋歌曲、曲風...",
+                hotTitle: "熱門曲風標籤",
+                clearFilter: "清除篩選條件",
+                heroTag: "🔥 用戶喜愛的音樂焦點單曲",
+                heroDesc: "享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。",
+                btnPlay: "立即播放",
+                sectionFeatured: "精選推薦",
+                sectionAllSongs: "全部歌曲清單",
+                playerReady: "準備就緒",
+                playerPlaying: "FR MUSIC 播放中",
+                playerPaused: "已暫停",
+                settingsTitle: "網站設定",
+                lblLang: "語言 (Language)",
+                lblBgTheme: "背景色系 (12種風格)",
+                btnCancel: "取消",
+                btnSave: "儲存設定",
+                notFound: "找不到符合條件的歌曲",
+                btnPlayList: "播放"
+            },
+            'en': {
+                pageTitle: "FR MUSIC - Professional Music Platform",
+                searchPlaceholder: "Search songs, genres...",
+                hotTitle: "Popular Genres",
+                clearFilter: "Clear Filter",
+                heroTag: "🔥 Featured Spotlight Track",
+                heroDesc: "Enjoy lossless audio quality and an immersive interactive interface. Click below to start your musical journey.",
+                btnPlay: "Play Now",
+                sectionFeatured: "Featured Recommendations",
+                sectionAllSongs: "All Songs",
+                playerReady: "Ready",
+                playerPlaying: "Playing...",
+                playerPaused: "Paused",
+                settingsTitle: "Website Settings",
+                lblLang: "Language",
+                lblBgTheme: "Background Theme (12 Styles)",
+                btnCancel: "Cancel",
+                btnSave: "Save Settings",
+                notFound: "No matching songs found",
+                btnPlayList: "Play"
+            },
+            'ja': {
+                pageTitle: "FR MUSIC - プロフェッショナル音楽プラットフォーム",
+                searchPlaceholder: "曲名やジャンルを検索...",
+                hotTitle: "人気のジャンル",
+                clearFilter: "フィルターをクリア",
+                heroTag: "🔥 おすすめの注目トラック",
+                heroDesc: "ロスレスの純粋な音質と没入型インタラクティブインターフェースをお楽しみください。",
+                btnPlay: "今すぐ再生",
+                sectionFeatured: "おすすめの推薦",
+                sectionAllSongs: "すべての楽曲",
+                playerReady: "準備完了",
+                playerPlaying: "再生中...",
+                playerPaused: "一時停止中",
+                settingsTitle: "サイト設定",
+                lblLang: "言語 (Language)",
+                lblBgTheme: "背景テーマ (12種類)",
+                btnCancel: "キャンセル",
+                btnSave: "保存",
+                notFound: "一致する曲が見つかりませんでした",
+                btnPlayList: "再生"
+            },
+            'ko': {
+                pageTitle: "FR MUSIC - 전문 음악 플랫폼",
+                searchPlaceholder: "노래, 장르 검색...",
+                hotTitle: "인기 장르 태그",
+                clearFilter: "필터 지우기",
+                heroTag: "🔥 추천 스포트라이트 트랙",
+                heroDesc: "손실 없는 순수한 음질과 몰입형 인터페이스를 즐겨보세요. 아래 버튼을 클릭하여 시작하세요.",
+                btnPlay: "지금 재생",
+                sectionFeatured: "추천 음원",
+                sectionAllSongs: "모든 노래 목록",
+                playerReady: "준비됨",
+                playerPlaying: "재생 중...",
+                playerPaused: "일시 정지",
+                settingsTitle: "사이트 설정",
+                lblLang: "언어 (Language)",
+                lblBgTheme: "배경 테마 (12가지 스타일)",
+                btnCancel: "취소",
+                btnSave: "설정 저장",
+                notFound: "일치하는 노래를 찾을 수 없습니다",
+                btnPlayList: "재생"
+            }
+        };
 
         const audio = document.getElementById('audio-player');
         const playIcon = document.getElementById('play-icon');
@@ -771,30 +872,48 @@
         }
 
         function loadUserSettings() {
-            const saved = JSON.parse(localStorage.getItem('fr_music_settings'));
-            if (saved) {
-                const brandTextEl = document.querySelector('#brand-title span');
-                if(brandTextEl) brandTextEl.innerText = saved.brandName || "FR MUSIC";
-                document.getElementById('page-title').innerText = (saved.brandName || "FR MUSIC") + " - 專業頂級音樂平台";
-                
-                document.documentElement.style.setProperty('--bg-color', saved.bgTheme || "#050505");
-                document.documentElement.style.setProperty('--accent', saved.accentColor || "#fa243c");
+            const saved = JSON.parse(localStorage.getItem('fr_music_settings')) || { language: 'zh-TW', bgTheme: '#050505' };
+            
+            // 套用背景色系
+            document.documentElement.style.setProperty('--bg-color', saved.bgTheme);
 
-                document.getElementById('setting-brand').value = saved.brandName || "FR MUSIC";
-                document.getElementById('setting-bg-theme').value = saved.bgTheme || "#050505";
-                document.getElementById('setting-accent').value = saved.accentColor || "#fa243c";
+            // 套用介面文字語系
+            applyLanguage(saved.language);
+
+            // 填入設定表單
+            document.getElementById('setting-language').value = saved.language;
+            document.getElementById('setting-bg-theme').value = saved.bgTheme;
+        }
+
+        function applyLanguage(lang) {
+            const t = translations[lang] || translations['zh-TW'];
+            document.getElementById('page-title').innerText = t.pageTitle;
+            document.getElementById('search-input').placeholder = t.searchPlaceholder;
+            document.getElementById('dd-title').innerText = t.hotTitle;
+            document.getElementById('dd-clear').innerText = t.clearFilter;
+            document.getElementById('hero-tag-text').innerText = t.heroTag;
+            document.getElementById('hero-desc').innerText = t.heroDesc;
+            document.getElementById('btn-play-now').innerText = t.btnPlay;
+            document.getElementById('section-featured').innerText = t.sectionFeatured;
+            document.getElementById('section-all-songs').innerText = t.sectionAllSongs;
+            if(!isPlaying) {
+                playerStatus.innerText = t.playerReady;
             }
+            document.getElementById('settings-title').innerText = t.settingsTitle;
+            document.getElementById('lbl-language').innerText = t.lblLang;
+            document.getElementById('lbl-bgtheme').innerText = t.lblBgTheme;
+            document.getElementById('btn-cancel').innerText = t.btnCancel;
+            document.getElementById('btn-save').innerText = t.btnSave;
         }
 
         loadUserSettings();
         loadMusicData();
 
         function saveSettings() {
-            const brandName = document.getElementById('setting-brand').value.trim() || "FR MUSIC";
+            const language = document.getElementById('setting-language').value;
             const bgTheme = document.getElementById('setting-bg-theme').value;
-            const accentColor = document.getElementById('setting-accent').value;
 
-            localStorage.setItem('fr_music_settings', JSON.stringify({ brandName, bgTheme, accentColor }));
+            localStorage.setItem('fr_music_settings', JSON.stringify({ language, bgTheme }));
             loadUserSettings();
             closeSettings();
         }
@@ -840,7 +959,9 @@
 
             document.getElementById('hero-cover').src = song.cover;
             document.getElementById('hero-title').innerText = song.title;
-            document.getElementById('hero-desc').innerText = song.desc || `享受無損純淨音質與沉浸式互動介面，立即聆聽 ${song.artist} 的精彩作品。`;
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+            document.getElementById('hero-desc').innerText = song.desc || t.heroDesc;
         }
 
         function renderGrid(songsToRender) {
@@ -865,8 +986,11 @@
             if (!listContainer) return;
             listContainer.innerHTML = '';
             
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+
             if (songsToRender.length === 0) {
-                listContainer.innerHTML = `<div style="text-align:center; color:var(--text-secondary); padding: 30px;">找不到符合條件的歌曲</div>`;
+                listContainer.innerHTML = `<div style="text-align:center; color:var(--text-secondary); padding: 30px;">${t.notFound}</div>`;
                 return;
             }
             
@@ -882,7 +1006,7 @@
                             </div>
                         </div>
                         <div class="song-actions-group">
-                            <button class="action-btn" onclick="playSong(${originalIndex})">播放</button>
+                            <button class="action-btn" onclick="playSong(${originalIndex})">${t.btnPlayList}</button>
                         </div>
                     </div>
                 `;
@@ -907,19 +1031,25 @@
             audio.play();
             isPlaying = true;
             
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+
             playerTitle.innerText = song.title;
             modalSongTitle.innerText = song.title;
             modalSongArtist.innerText = song.artist;
             playerThumb.src = song.cover;
             modalCover.src = song.cover;
             modalBlurBg.style.backgroundImage = `url('${song.cover}')`;
-            playerStatus.innerText = "FR MUSIC 播放中";
+            playerStatus.innerText = t.playerPlaying;
             
             playIcon.innerHTML = pauseSvg;
             modalPlayIcon.innerHTML = pauseSvg;
         }
 
         function togglePlayPause() {
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+
             if (!audio.src && playlist.length > 0) {
                 playSong(0);
                 return;
@@ -929,13 +1059,13 @@
                 isPlaying = false;
                 playIcon.innerHTML = playSvg;
                 modalPlayIcon.innerHTML = playSvg;
-                playerStatus.innerText = "已暫停";
+                playerStatus.innerText = t.playerPaused;
             } else {
                 audio.play();
                 isPlaying = true;
                 playIcon.innerHTML = pauseSvg;
                 modalPlayIcon.innerHTML = pauseSvg;
-                playerStatus.innerText = "FR MUSIC 播放中";
+                playerStatus.innerText = t.playerPlaying;
             }
         }
 
@@ -983,7 +1113,7 @@
 
                 if (isPlaying) {
                     document.querySelectorAll('.v-bar').forEach(bar => {
-                        const randomHeight = Math.floor(Math.random() * 24) + 6;
+                        const randomHeight = Math.floor(Math.random() * 28) + 8;
                         bar.style.height = randomHeight + 'px';
                     });
                 }

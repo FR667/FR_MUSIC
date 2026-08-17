@@ -28,7 +28,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-bottom: 110px; /* 預留底部播放器空間 */
+            padding-bottom: 110px;
             transition: background-color 0.3s ease;
         }
 
@@ -38,8 +38,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -51,16 +51,17 @@
             font-weight: 700;
             letter-spacing: 1px;
             color: var(--text-primary);
+            cursor: pointer;
         }
 
         .search-container {
             position: relative;
-            width: 350px;
+            width: 380px;
         }
 
         .search-bar {
             width: 100%;
-            padding: 10px 16px 10px 40px;
+            padding: 11px 16px 11px 42px;
             border-radius: 500px;
             border: 1px solid transparent;
             background-color: #242424;
@@ -93,8 +94,8 @@
             width: 100%;
             background: #181818;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
             display: none;
             z-index: 200;
             padding: 10px 0;
@@ -109,16 +110,18 @@
             font-size: 12px;
             color: var(--text-secondary);
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .tag-item {
-            padding: 8px 16px;
+            padding: 10px 16px;
             font-size: 14px;
             color: var(--text-primary);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.2s;
         }
 
         .tag-item:hover {
@@ -133,7 +136,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8px;
+            padding: 10px;
             border-radius: 50%;
             transition: color 0.2s, background 0.2s;
         }
@@ -146,7 +149,7 @@
         /* 主要內容區 */
         main {
             flex: 1;
-            padding: 30px 40px;
+            padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -154,26 +157,28 @@
 
         /* 英雄區 (Hero Banner) */
         .hero-banner {
-            background: linear-gradient(135deg, #1e1e1e 0%, #0a0a0a 100%);
-            border-radius: 16px;
-            padding: 40px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #0c0c0c 100%);
+            border-radius: 20px;
+            padding: 48px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             margin-bottom: 40px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .hero-banner h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+            font-size: 38px;
+            margin-bottom: 12px;
             font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .hero-banner p {
             color: var(--text-secondary);
             font-size: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .hero-play-btn {
@@ -183,13 +188,14 @@
             background-color: var(--accent);
             color: #fff;
             border: none;
-            padding: 12px 28px;
+            padding: 13px 30px;
             border-radius: 500px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             width: fit-content;
             transition: transform 0.2s, filter 0.2s;
+            box-shadow: 0 4px 15px rgba(250, 36, 60, 0.4);
         }
 
         .hero-play-btn:hover {
@@ -202,28 +208,29 @@
             font-size: 22px;
             margin-bottom: 20px;
             font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         /* 精選推薦網格 */
         .grid-section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 24px;
+            margin-bottom: 45px;
         }
 
         .album-card {
             background-color: var(--surface-color);
             padding: 16px;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s, border-color 0.2s;
             border: 1px solid transparent;
         }
 
         .album-card:hover {
             background-color: var(--surface-hover);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             border-color: var(--border-color);
         }
 
@@ -231,9 +238,9 @@
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
 
         .album-card .title {
@@ -257,41 +264,44 @@
         .song-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .song-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 16px;
+            padding: 10px 18px;
             background-color: var(--surface-color);
-            border-radius: 8px;
-            transition: background 0.2s;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            transition: background 0.2s, border-color 0.2s;
         }
 
         .song-item:hover {
             background-color: var(--surface-hover);
+            border-color: var(--border-color);
         }
 
         .song-info {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             flex: 1;
             cursor: pointer;
         }
 
         .song-thumb {
-            width: 45px;
-            height: 45px;
-            border-radius: 6px;
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
             object-fit: cover;
         }
 
         .song-title {
             font-size: 15px;
             font-weight: 600;
+            margin-bottom: 2px;
         }
 
         .song-artist {
@@ -303,9 +313,10 @@
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 6px 16px;
+            padding: 7px 18px;
             border-radius: 20px;
             font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -322,35 +333,45 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 90px;
+            height: 96px;
             background: #121212;
             border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 24px;
+            padding: 0 28px;
             z-index: 90;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
         }
 
         .player-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             width: 300px;
             cursor: pointer;
         }
 
         .player-left img {
-            width: 56px;
-            height: 56px;
-            border-radius: 6px;
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
             object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .player-left:hover img {
+            transform: scale(1.03);
         }
 
         .player-meta .title {
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 210px;
         }
 
         .player-meta .status {
@@ -370,7 +391,7 @@
         .player-controls {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 22px;
         }
 
         .ctrl-btn {
@@ -395,15 +416,15 @@
         .play-pause-btn {
             background: var(--text-primary);
             color: var(--bg-color);
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border: none;
-            transition: transform 0.1s;
+            transition: transform 0.1s, background-color 0.2s;
         }
 
         .play-pause-btn:hover {
@@ -413,7 +434,7 @@
         .progress-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             font-size: 11px;
             color: var(--text-secondary);
@@ -426,6 +447,7 @@
             border-radius: 2px;
             position: relative;
             cursor: pointer;
+            transition: height 0.1s;
         }
 
         .progress-bar:hover {
@@ -455,27 +477,27 @@
         }
 
         .volume-slider {
-            width: 100px;
+            width: 110px;
             accent-color: var(--text-primary);
             cursor: pointer;
         }
 
-        /* 全螢幕播放 Modal */
+        /* 全螢幕播放 Modal 訪 Apple 風格卡片 */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(25px);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.35s ease;
         }
 
         .modal-overlay.open {
@@ -484,55 +506,77 @@
         }
 
         .modal-content {
-            background: #181818;
+            background: linear-gradient(160deg, #1e1e1e 0%, #121212 100%);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 24px;
+            padding: 44px;
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+            transform: scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
         }
 
         .close-modal-btn {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: none;
+            background: rgba(255,255,255,0.08);
             border: none;
             color: var(--text-secondary);
-            font-size: 24px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
             cursor: pointer;
+            transition: all 0.2s;
         }
-        .close-modal-btn:hover { color: var(--text-primary); }
+        .close-modal-btn:hover { 
+            background: rgba(255,255,255,0.15);
+            color: var(--text-primary); 
+        }
 
         .modal-cover {
-            width: 280px;
-            height: 280px;
-            border-radius: 12px;
+            width: 290px;
+            height: 290px;
+            border-radius: 16px;
             object-fit: cover;
             margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
         }
 
         .modal-title {
             font-size: 22px;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .modal-artist {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
         }
 
         .modal-controls {
             display: flex;
             align-items: center;
-            gap: 24px;
-            margin-top: 20px;
+            gap: 28px;
+            margin-top: 24px;
         }
 
-        /* 隱藏原生音訊 */
         #audio-player { display: none; }
     </style>
 </head>
@@ -540,13 +584,13 @@
 
     <!-- 頂部導覽列 -->
     <header>
-        <div class="logo" id="brand-title">FR MUSIC</div>
+        <div class="logo" id="brand-title" onclick="resetSearchFilter()">FR MUSIC</div>
         
         <div class="search-container">
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" id="search-input" class="search-bar" placeholder="搜尋歌曲、曲風..." onfocus="showHotSearch()" onblur="hideHotSearch()" oninput="filterSongs(this.value)">
             
-            <!-- 熱門搜尋下拉 -->
+            <!-- 熱門搜尋下拉選單 -->
             <div class="search-dropdown" id="search-dropdown">
                 <div class="dropdown-title">熱門曲風標籤</div>
                 <div class="tag-item" onclick="selectTag('電子賽博')"><span>⚡ 電子賽博</span></div>
@@ -569,7 +613,7 @@
             <p>串聯自 GitHub Raw 的動態音樂庫，隨時隨地享受極致音質。</p>
             <button class="hero-play-btn" onclick="toggleHeroPlay()">
                 <svg id="hero-play-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                播放精選
+                立即播放精選
             </button>
         </div>
 
@@ -592,7 +636,7 @@
 
     <!-- 底部常駐播放器 -->
     <div class="bottom-player">
-        <div class="player-left" onclick="openModal()">
+        <div class="player-left" onclick="openModal()" title="展開全螢幕播放器">
             <img id="player-thumb" src="" alt="封面">
             <div class="player-meta">
                 <div class="title" id="player-title">尚未選擇歌曲</div>
@@ -633,14 +677,15 @@
         </div>
     </div>
 
-    <!-- 全螢幕播放 Modal -->
+    <!-- 全螢幕播放 Modal (訪 Apple 撥放卡片) -->
     <div class="modal-overlay" id="now-playing-modal">
         <div class="modal-content">
             <button class="close-modal-btn" onclick="closeModal()">×</button>
             <img class="modal-cover" src="" alt="封面">
             <div class="modal-title" id="modal-song-title">歌曲名稱</div>
+            <div class="modal-artist" id="modal-song-artist">演出者</div>
             
-            <div class="progress-container" style="width: 100%; margin-bottom: 20px;">
+            <div class="progress-container" style="width: 100%; margin-bottom: 15px;">
                 <span id="modal-current-time">0:00</span>
                 <div class="progress-bar" id="modal-progress-bar">
                     <div class="progress-filled" id="modal-progress-filled"></div>
@@ -650,7 +695,7 @@
 
             <div class="modal-controls">
                 <button class="ctrl-btn" onclick="prevSong()"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-                <button class="play-pause-btn" style="width:50px; height:50px;" onclick="togglePlayPause()">
+                <button class="play-pause-btn" style="width:52px; height:52px;" onclick="togglePlayPause()">
                     <svg id="modal-play-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="nextSong()"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg></button>
@@ -661,16 +706,17 @@
     <!-- 設定視窗 Modal -->
     <div class="modal-overlay" id="settings-modal">
         <div class="modal-content" style="max-width: 400px; text-align: left;">
+            <button class="close-modal-btn" onclick="closeSettings()">×</button>
             <h3 style="margin-bottom: 20px;">網站設定</h3>
             
             <div style="margin-bottom: 15px;">
                 <label style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">網站標題 / 品牌名稱</label>
-                <input type="text" id="setting-brand" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:6px; outline:none;" value="FR MUSIC">
+                <input type="text" id="setting-brand" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;" value="FR MUSIC">
             </div>
 
             <div style="margin-bottom: 15px;">
                 <label style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">背景色調</label>
-                <select id="setting-bg-theme" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:6px; outline:none;">
+                <select id="setting-bg-theme" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
                     <option value="#050505">極黑沉浸 (預設)</option>
                     <option value="#0f172a">深邃夜空藍</option>
                     <option value="#180f2a">神祕暗夜紫</option>
@@ -685,8 +731,8 @@
             </div>
 
             <div style="display:flex; justify-content:flex-end; gap:10px;">
-                <button onclick="closeSettings()" style="padding:8px 16px; background:#333; border:none; color:#fff; border-radius:6px; cursor:pointer;">取消</button>
-                <button onclick="saveSettings()" style="padding:8px 16px; background:var(--accent); border:none; color:#fff; border-radius:6px; cursor:pointer;">儲存設定</button>
+                <button onclick="closeSettings()" style="padding:9px 18px; background:#333; border:none; color:#fff; border-radius:8px; cursor:pointer;">取消</button>
+                <button onclick="saveSettings()" style="padding:9px 18px; background:var(--accent); border:none; color:#fff; border-radius:8px; cursor:pointer;">儲存設定</button>
             </div>
         </div>
     </div>
@@ -710,6 +756,7 @@
         const heroPlayIcon = document.getElementById('hero-play-icon');
         const playerTitle = document.getElementById('player-title');
         const modalSongTitle = document.getElementById('modal-song-title');
+        const modalSongArtist = document.getElementById('modal-song-artist');
         const playerStatus = document.getElementById('player-status');
         const playerThumb = document.getElementById('player-thumb');
         const modalCover = document.querySelector('.modal-cover');
@@ -736,6 +783,7 @@
                     const song = playlist[0];
                     playerTitle.innerText = song.title;
                     modalSongTitle.innerText = song.title;
+                    modalSongArtist.innerText = song.artist;
                     playerThumb.src = song.cover;
                     modalCover.src = song.cover;
                 }
@@ -840,7 +888,7 @@
         }
 
         function filterSongs(keyword) {
-            const filtered = playlist.filter(s => s.title.toLowerCase().includes(keyword.toLowerCase()));
+            const filtered = playlist.filter(s => s.title.toLowerCase().includes(keyword.toLowerCase()) || s.desc.toLowerCase().includes(keyword.toLowerCase()));
             renderList(filtered);
         }
 
@@ -856,6 +904,7 @@
             
             playerTitle.innerText = song.title;
             modalSongTitle.innerText = song.title;
+            modalSongArtist.innerText = song.artist;
             playerThumb.src = song.cover;
             modalCover.src = song.cover;
             playerStatus.innerText = "FR MUSIC 播放中";
@@ -865,7 +914,6 @@
             heroPlayIcon.innerHTML = pauseSvg;
         }
 
-        // 英雄區播放按鈕：按一下播放/暫停
         function toggleHeroPlay() {
             if (!audio.src && playlist.length > 0) {
                 playSong(0);

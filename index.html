@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title id="page-title">FR MUSIC - 專業頂級音樂平台</title>
     <style>
         :root {
@@ -20,6 +20,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -30,6 +31,7 @@
             flex-direction: column;
             padding-bottom: 110px;
             transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-x: hidden;
         }
 
         /* 頂部導覽列 */
@@ -37,29 +39,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 15px 30px;
             background: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
+            gap: 15px;
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: 1px;
             color: var(--text-primary);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .logo img {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             object-fit: cover;
             border-radius: 50%;
             transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -71,12 +75,13 @@
 
         .search-container {
             position: relative;
-            width: 380px;
+            flex: 1;
+            max-width: 380px;
         }
 
         .search-bar {
             width: 100%;
-            padding: 11px 16px 11px 42px;
+            padding: 10px 14px 10px 38px;
             border-radius: 500px;
             border: 1px solid transparent;
             background-color: #242424;
@@ -94,12 +99,12 @@
 
         .search-icon {
             position: absolute;
-            left: 14px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-secondary);
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
         }
 
         .search-dropdown {
@@ -126,16 +131,17 @@
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 10px;
+            padding: 8px;
             border-radius: 50%;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
         .settings-btn:hover { color: var(--text-primary); background: var(--surface-hover); transform: rotate(45deg); }
 
         /* 主要內容區 */
         main {
             flex: 1;
-            padding: 40px;
+            padding: 30px 40px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -143,14 +149,14 @@
 
         .hero-banner {
             background: linear-gradient(135deg, #2b0c11 0%, #120507 100%);
-            border-radius: 24px;
-            padding: 40px 50px;
-            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 35px 40px;
+            margin-bottom: 35px;
             border: 1px solid rgba(250, 36, 60, 0.2);
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
-            gap: 35px;
+            gap: 30px;
             position: relative;
             overflow: hidden;
         }
@@ -170,9 +176,9 @@
         }
 
         .hero-cover {
-            width: 170px;
-            height: 170px;
-            border-radius: 16px;
+            width: 150px;
+            height: 150px;
+            border-radius: 14px;
             object-fit: cover;
             box-shadow: 0 12px 30px rgba(0,0,0,0.6);
             flex-shrink: 0;
@@ -185,33 +191,37 @@
             color: var(--accent);
             font-weight: 700;
             letter-spacing: 1px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .hero-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .hero-btn {
             background: var(--accent);
             color: #fff;
             border: none;
-            padding: 11px 26px;
+            padding: 10px 24px;
             border-radius: 500px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -224,8 +234,8 @@
         .hero-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
 
         section h3 {
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 16px;
             font-weight: 700;
             letter-spacing: -0.3px;
         }
@@ -233,15 +243,15 @@
         /* 精選推薦網格 */
         .grid-section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 24px;
-            margin-bottom: 45px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
         .album-card {
             background-color: var(--surface-color);
-            padding: 16px;
-            border-radius: 16px;
+            padding: 14px;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid transparent;
@@ -249,7 +259,7 @@
 
         .album-card:hover {
             background-color: var(--surface-hover);
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             border-color: var(--border-color);
             box-shadow: 0 12px 30px rgba(0,0,0,0.5);
         }
@@ -258,41 +268,43 @@
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 14px;
+            border-radius: 10px;
+            margin-bottom: 12px;
         }
 
-        .album-card .title { font-size: 15px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .album-card .desc { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .album-card .title { font-size: 14px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .album-card .desc { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         /* 全部歌曲清單 */
-        .song-list { display: flex; flex-direction: column; gap: 10px; }
+        .song-list { display: flex; flex-direction: column; gap: 8px; }
         .song-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 18px;
+            padding: 10px 16px;
             background-color: var(--surface-color);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid transparent;
             transition: all 0.25s;
         }
         .song-item:hover { background-color: var(--surface-hover); border-color: var(--border-color); }
-        .song-info { display: flex; align-items: center; gap: 16px; flex: 1; cursor: pointer; }
-        .song-thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
-        .song-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-        .song-artist { font-size: 13px; color: var(--text-secondary); }
+        .song-info { display: flex; align-items: center; gap: 14px; flex: 1; cursor: pointer; min-width: 0; }
+        .song-thumb { width: 42px; height: 42px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
+        .song-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .song-artist { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .action-btn {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 7px 18px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
         .action-btn:hover { border-color: var(--text-primary); background: var(--text-primary); color: var(--bg-color); }
 
@@ -302,24 +314,25 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 96px;
+            height: 88px;
             background: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 28px;
+            padding: 0 20px;
             z-index: 90;
         }
 
-        .player-left { display: flex; align-items: center; gap: 16px; width: 300px; cursor: pointer; }
-        .player-left img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
-        .player-meta .title { font-size: 14px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
-        .player-meta .status { font-size: 12px; color: var(--text-secondary); }
+        .player-left { display: flex; align-items: center; gap: 12px; width: 260px; cursor: pointer; min-width: 0; }
+        .player-left img { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .player-meta { min-width: 0; flex: 1; }
+        .player-meta .title { font-size: 13px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .player-meta .status { font-size: 11px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .player-center { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; max-width: 600px; }
-        .player-controls { display: flex; align-items: center; gap: 20px; }
+        .player-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; max-width: 550px; padding: 0 10px; }
+        .player-controls { display: flex; align-items: center; gap: 16px; }
         .ctrl-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
         .ctrl-btn:hover { color: var(--text-primary); transform: scale(1.1); }
         .ctrl-btn.active { color: var(--accent); }
@@ -327,8 +340,8 @@
         .play-pause-btn {
             background: var(--text-primary);
             color: var(--bg-color);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -336,16 +349,17 @@
             cursor: pointer;
             border: none;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
         .play-pause-btn:hover { transform: scale(1.1); }
 
-        .progress-container { display: flex; align-items: center; gap: 12px; width: 100%; font-size: 11px; color: var(--text-secondary); }
-        .progress-bar { flex: 1; height: 5px; background: #4d4d4d; border-radius: 3px; position: relative; cursor: pointer; }
-        .progress-filled { position: absolute; top: 0; left: 0; height: 100%; background: var(--text-primary); border-radius: 3px; width: 0%; }
+        .progress-container { display: flex; align-items: center; gap: 10px; width: 100%; font-size: 11px; color: var(--text-secondary); }
+        .progress-bar { flex: 1; height: 4px; background: #4d4d4d; border-radius: 2px; position: relative; cursor: pointer; }
+        .progress-filled { position: absolute; top: 0; left: 0; height: 100%; background: var(--text-primary); border-radius: 2px; width: 0%; }
         .progress-bar:hover .progress-filled { background: var(--accent); }
 
-        .player-right { width: 300px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
-        .volume-slider { width: 100px; accent-color: var(--text-primary); cursor: pointer; }
+        .player-right { width: 220px; display: flex; justify-content: flex-end; align-items: center; gap: 10px; }
+        .volume-slider { width: 90px; accent-color: var(--text-primary); cursor: pointer; }
 
         /* 全螢幕播放 Modal */
         .modal-overlay {
@@ -393,16 +407,16 @@
 
         .carplay-container {
             width: 90%;
-            max-width: 900px;
-            background: rgba(18, 18, 22, 0.65);
+            max-width: 850px;
+            background: rgba(18, 18, 22, 0.7);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 32px;
+            border-radius: 28px;
             display: flex;
             align-items: center;
-            gap: 50px;
-            padding: 50px;
+            gap: 40px;
+            padding: 40px;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             position: relative;
             z-index: 10;
@@ -415,18 +429,18 @@
 
         .close-modal-btn {
             position: absolute;
-            top: 24px;
-            right: 24px;
+            top: 20px;
+            right: 20px;
             background: rgba(255,255,255,0.1);
             border: none;
             color: var(--text-secondary);
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             z-index: 20;
             transition: all 0.2s;
@@ -435,29 +449,29 @@
 
         .carplay-left {
             position: relative;
-            width: 320px;
-            height: 320px;
+            width: 280px;
+            height: 280px;
             flex-shrink: 0;
         }
 
         .carplay-cover {
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 16px;
             object-fit: cover;
             box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
-        /* 升級版流暢等化器動畫 */
+        /* 等化器動畫 */
         .visualizer-bars {
             position: absolute;
-            bottom: -18px;
+            bottom: -16px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: flex-end;
-            gap: 5px;
-            height: 35px;
+            gap: 4px;
+            height: 30px;
             pointer-events: none;
             background: rgba(0, 0, 0, 0.35);
             padding: 4px 10px;
@@ -466,7 +480,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .v-bar {
-            width: 4px;
+            width: 3px;
             background: var(--accent);
             border-radius: 3px;
             height: 6px;
@@ -479,60 +493,108 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-width: 0;
         }
 
         .carplay-song-title {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.5px;
             color: #ffffff;
             line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .carplay-song-artist {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-secondary);
-            margin-bottom: 35px;
+            margin-bottom: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .carplay-controls-area {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             width: 100%;
         }
 
         .carplay-controls {
             display: flex;
             align-items: center;
-            gap: 24px;
+            justify-content: space-between;
+            width: 100%;
         }
 
         #audio-player { display: none; }
 
+        /* 手機版極致優化 (防止比例過大、破版) */
         @media(max-width: 768px) {
-            header { padding: 15px 20px; }
-            .search-container { width: 200px; }
-            main { padding: 20px; }
-            .hero-banner { flex-direction: column; text-align: center; padding: 25px; gap: 20px; }
-            .hero-cover { width: 130px; height: 130px; }
-            .hero-tag { justify-content: center; }
+            header { padding: 12px 16px; }
+            .logo { font-size: 17px; }
+            .logo img { width: 30px; height: 30px; }
+            .search-container { max-width: none; flex: 1; }
+            .search-bar { padding: 8px 12px 8px 34px; font-size: 13px; }
+            
+            main { padding: 16px; }
+            .hero-banner { 
+                flex-direction: column; 
+                text-align: center; 
+                padding: 20px 16px; 
+                gap: 16px; 
+                border-radius: 16px;
+                margin-bottom: 25px;
+            }
+            .hero-cover { width: 110px; height: 110px; border-radius: 12px; }
+            .hero-title { font-size: 20px; }
+            .hero-desc { font-size: 12px; margin-bottom: 15px; }
+            .hero-btn { padding: 8px 20px; font-size: 12px; }
+            .hero-tag { justify-content: center; font-size: 11px; }
+
+            section h3 { font-size: 17px; margin-bottom: 12px; }
+            .grid-section { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 30px; }
+            .album-card { padding: 10px; border-radius: 12px; }
+            .album-card .title { font-size: 13px; }
+            .album-card .desc { font-size: 11px; }
+
+            .song-item { padding: 8px 12px; }
+            .song-thumb { width: 38px; height: 38px; }
+            .song-title { font-size: 13px; }
+            .song-artist { font-size: 11px; }
+            .action-btn { padding: 5px 12px; font-size: 11px; }
+
+            /* 底部播放器手機排版 */
+            .bottom-player { height: 76px; padding: 0 12px; }
+            .player-left { width: 160px; gap: 10px; }
+            .player-left img { width: 44px; height: 44px; border-radius: 6px; }
+            .player-meta .title { font-size: 12px; }
+            .player-meta .status { font-size: 10px; }
+            .player-center { max-width: none; flex: 1; padding: 0 4px; gap: 4px; }
+            .player-controls { gap: 12px; }
+            .play-pause-btn { width: 32px; height: 32px; }
+            .ctrl-btn svg { width: 16px; height: 16px; }
+            .player-right { display: none; } /* 手機隱藏音量條省空間 */
+
+            /* 全螢幕 Modal 手機適配 */
             .carplay-container {
                 flex-direction: column;
-                width: 92%;
-                padding: 30px 20px;
-                gap: 25px;
-                max-height: 90vh;
-                overflow-y: auto;
+                width: 95%;
+                padding: 24px 16px;
+                gap: 20px;
+                max-height: 85vh;
+                border-radius: 20px;
             }
-            .carplay-left { width: 200px; height: 200px; }
-            .carplay-song-title { font-size: 22px; text-align: center; }
-            .carplay-song-artist { font-size: 14px; text-align: center; margin-bottom: 20px; }
+            .carplay-left { width: 180px; height: 180px; }
+            .carplay-song-title { font-size: 18px; text-align: center; }
+            .carplay-song-artist { font-size: 13px; text-align: center; margin-bottom: 15px; }
             .carplay-right { width: 100%; align-items: center; }
-            .carplay-controls { justify-content: center; gap: 16px; }
-            .player-right { display: none; }
-            .player-left { width: 220px; }
+            .carplay-controls { justify-content: space-around; width: 100%; gap: 0; }
+            .close-modal-btn { top: 12px; right: 12px; width: 28px; height: 28px; font-size: 14px; }
         }
     </style>
 </head>
@@ -559,7 +621,7 @@
         </div>
 
         <button class="settings-btn" onclick="openSettings()" title="網站設定">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
     </header>
 
@@ -572,13 +634,13 @@
                 <div class="hero-title" id="hero-title">載入中...</div>
                 <div class="hero-desc" id="hero-desc">享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。</div>
                 <button class="hero-btn" onclick="openModal(); playSong(heroSongIndex);">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     <span id="btn-play-now">立即播放</span>
                 </button>
             </div>
         </div>
 
-        <section style="margin-bottom: 40px;">
+        <section style="margin-bottom: 35px;">
             <h3 id="section-featured">精選推薦</h3>
             <div class="grid-section" id="grid-section-container"></div>
         </section>
@@ -602,25 +664,25 @@
         <div class="player-center">
             <div class="player-controls">
                 <button class="ctrl-btn shuffle-trigger" onclick="toggleShuffle()" title="隨機播放">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="prevSong()" title="上一首">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="skipTime(-10)" title="快退 10 秒">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
                 </button>
                 <button class="play-pause-btn" onclick="togglePlayPause()">
-                    <svg id="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg id="play-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="skipTime(10)" title="快轉 10 秒">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
                 </button>
                 <button class="ctrl-btn" onclick="nextSong()" title="下一首">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg>
                 </button>
                 <button class="ctrl-btn repeat-trigger" onclick="toggleRepeat()" title="單曲循環">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
                 </button>
             </div>
             <div class="progress-container">
@@ -633,7 +695,7 @@
         </div>
 
         <div class="player-right">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
             <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
         </div>
     </div>
@@ -668,17 +730,17 @@
 
                     <div class="carplay-controls">
                         <button class="ctrl-btn shuffle-trigger" onclick="toggleShuffle()" title="隨機播放">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
                         </button>
-                        <button class="ctrl-btn" onclick="prevSong()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-                        <button class="ctrl-btn" onclick="skipTime(-10)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
-                        <button class="play-pause-btn" style="width:48px; height:48px;" onclick="togglePlayPause()">
-                            <svg id="modal-play-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        <button class="ctrl-btn" onclick="prevSong()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                        <button class="ctrl-btn" onclick="skipTime(-10)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
+                        <button class="play-pause-btn" style="width:42px; height:42px;" onclick="togglePlayPause()">
+                            <svg id="modal-play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                         </button>
-                        <button class="ctrl-btn" onclick="skipTime(10)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
-                        <button class="ctrl-btn" onclick="nextSong()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg></button>
+                        <button class="ctrl-btn" onclick="skipTime(10)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
+                        <button class="ctrl-btn" onclick="nextSong()"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg></button>
                         <button class="ctrl-btn repeat-trigger" onclick="toggleRepeat()" title="單曲循環">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
                         </button>
                     </div>
                 </div>
@@ -688,13 +750,13 @@
 
     <!-- 設定視窗 Modal -->
     <div class="modal-overlay" id="settings-modal" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);">
-        <div class="carplay-container" style="max-width: 420px; display: block; text-align: left;">
+        <div class="carplay-container" style="max-width: 380px; display: block; text-align: left;">
             <button class="close-modal-btn" onclick="closeSettings()">×</button>
-            <h3 id="settings-title" style="margin-bottom: 20px;">網站設定</h3>
+            <h3 id="settings-title" style="margin-bottom: 18px;">網站設定</h3>
             
-            <div style="margin-bottom: 15px;">
-                <label id="lbl-language" style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">語言 (Language)</label>
-                <select id="setting-language" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
+            <div style="margin-bottom: 14px;">
+                <label id="lbl-language" style="display:block; font-size:13px; margin-bottom:5px; color:var(--text-secondary);">語言 (Language)</label>
+                <select id="setting-language" style="width:100%; padding:9px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none; font-size: 13px;">
                     <option value="zh-TW">繁體中文</option>
                     <option value="en">English (英文)</option>
                     <option value="ja">日本語 (日文)</option>
@@ -702,9 +764,9 @@
                 </select>
             </div>
 
-            <div style="margin-bottom: 25px;">
-                <label id="lbl-bgtheme" style="display:block; font-size:14px; margin-bottom:5px; color:var(--text-secondary);">背景色系 (12種風格)</label>
-                <select id="setting-bg-theme" style="width:100%; padding:10px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none;">
+            <div style="margin-bottom: 22px;">
+                <label id="lbl-bgtheme" style="display:block; font-size:13px; margin-bottom:5px; color:var(--text-secondary);">背景色系 (12種風格)</label>
+                <select id="setting-bg-theme" style="width:100%; padding:9px; background:#222; border:1px solid var(--border-color); color:#fff; border-radius:8px; outline:none; font-size: 13px;">
                     <option value="#050505">1. 極黑沉浸 (預設)</option>
                     <option value="#0f172a">2. 深邃夜空藍</option>
                     <option value="#180f2a">3. 神祕暗夜紫</option>
@@ -720,9 +782,9 @@
                 </select>
             </div>
 
-            <div style="display:flex; justify-content:flex-end; gap:10px;">
-                <button id="btn-cancel" onclick="closeSettings()" style="padding:9px 18px; background:#333; border:none; color:#fff; border-radius:8px; cursor:pointer;">取消</button>
-                <button id="btn-save" onclick="saveSettings()" style="padding:9px 18px; background:var(--accent); border:none; color:#fff; border-radius:8px; cursor:pointer;">儲存設定</button>
+            <div style="display:flex; justify-content:flex-end; gap:8px;">
+                <button id="btn-cancel" onclick="closeSettings()" style="padding:8px 16px; background:#333; border:none; color:#fff; border-radius:8px; cursor:pointer; font-size:13px;">取消</button>
+                <button id="btn-save" onclick="saveSettings()" style="padding:8px 16px; background:var(--accent); border:none; color:#fff; border-radius:8px; cursor:pointer; font-size:13px;">儲存設定</button>
             </div>
         </div>
     </div>
@@ -730,6 +792,39 @@
     <audio id="audio-player"></audio>
 
     <script>
+        // ==========================================
+        // 防止查看原始碼與保護機制
+        // ==========================================
+        // 1. 禁用滑鼠右鍵選單
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // 2. 禁用常用快捷鍵 (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J)
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.keyCode === 123 || // F12
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67 || e.keyCode === 74)) || // Ctrl+Shift+I/C/J
+                (e.ctrlKey && e.keyCode === 85) // Ctrl+U (檢視原始碼)
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 3. 基礎主控台攔截防護
+        setInterval(function() {
+            const before = new Date().getTime();
+            debugger;
+            const after = new Date().getTime();
+            if (after - before > 100) {
+                // 偵測到開發者工具開啟時可選動作
+            }
+        }, 1000);
+
+        // ==========================================
+        // 音樂平台核心邏輯
+        // ==========================================
         let playlist = [];
         let playCounts = JSON.parse(localStorage.getItem('fr_play_counts')) || {};
         let currentIndex = 0;
@@ -740,7 +835,6 @@
 
         const JSON_URL = "https://raw.githubusercontent.com/FR667/FR_MUSIC/refs/heads/main/data.json";
 
-        // 多語系字典
         const translations = {
             'zh-TW': {
                 pageTitle: "FR MUSIC - 專業頂級音樂平台",
@@ -873,14 +967,8 @@
 
         function loadUserSettings() {
             const saved = JSON.parse(localStorage.getItem('fr_music_settings')) || { language: 'zh-TW', bgTheme: '#050505' };
-            
-            // 套用背景色系
             document.documentElement.style.setProperty('--bg-color', saved.bgTheme);
-
-            // 套用介面文字語系
             applyLanguage(saved.language);
-
-            // 填入設定表單
             document.getElementById('setting-language').value = saved.language;
             document.getElementById('setting-bg-theme').value = saved.bgTheme;
         }
@@ -896,9 +984,7 @@
             document.getElementById('btn-play-now').innerText = t.btnPlay;
             document.getElementById('section-featured').innerText = t.sectionFeatured;
             document.getElementById('section-all-songs').innerText = t.sectionAllSongs;
-            if(!isPlaying) {
-                playerStatus.innerText = t.playerReady;
-            }
+            if(!isPlaying) { playerStatus.innerText = t.playerReady; }
             document.getElementById('settings-title').innerText = t.settingsTitle;
             document.getElementById('lbl-language').innerText = t.lblLang;
             document.getElementById('lbl-bgtheme').innerText = t.lblBgTheme;
@@ -912,7 +998,6 @@
         function saveSettings() {
             const language = document.getElementById('setting-language').value;
             const bgTheme = document.getElementById('setting-bg-theme').value;
-
             localStorage.setItem('fr_music_settings', JSON.stringify({ language, bgTheme }));
             loadUserSettings();
             closeSettings();
@@ -937,7 +1022,6 @@
             const logoImg = document.getElementById('logo-img');
             logoImg.classList.add('rotate-animate');
             setTimeout(() => { logoImg.classList.remove('rotate-animate'); }, 800);
-
             resetSearchFilter();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1000,7 +1084,7 @@
                     <div class="song-item">
                         <div class="song-info" onclick="openModal(); playSong(${originalIndex});">
                             <img src="${song.cover}" class="song-thumb" alt="封面">
-                            <div>
+                            <div style="min-width:0; flex:1;">
                                 <div class="song-title">${song.title}</div>
                                 <div class="song-artist">${song.artist}</div>
                             </div>
@@ -1113,7 +1197,7 @@
 
                 if (isPlaying) {
                     document.querySelectorAll('.v-bar').forEach(bar => {
-                        const randomHeight = Math.floor(Math.random() * 28) + 8;
+                        const randomHeight = Math.floor(Math.random() * 24) + 6;
                         bar.style.height = randomHeight + 'px';
                     });
                 }

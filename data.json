@@ -38,5 +38,21 @@
         "desc": "電子賽博 · 最新發行",
         "cover": "https://i.ibb.co/whmVQM2T/image-large-9a21a041-bed0-45a4-be1b-741b3feeb32f.jpg",
         "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786937363/Falling_Through_Glass.mp3"
-    }
+    },
+        {
+        "id": 5,
+        "title": "Fading Home",
+        "artist": "FR MUSIC · ryfn888發行",
+        "desc": "電音 · 低音",
+        "cover": "https://i.ibb.co/cSwZDqXJ/image-large-1eeab761-f670-4f70-ba05-90a5c7d65f01.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786964150/Fading_Home.mp3"
+    },
+        {
+        "id": 6,
+        "title": "Fading Echoes",
+        "artist": "FR MUSIC · ryfn888發行",
+        "desc": "電子音樂 · 高音質",
+        "cover": "https://i.ibb.co/LdBDyxsD/image-large-d16d5d39-6845-48d6-a40d-1afa274dba8e.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786964332/Fading_Home_1.mp3"
+    },
 ]

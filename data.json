@@ -9,26 +9,26 @@
     },
     {
         "id": 1,
-        "title": "FR 精選單曲 01",
+        "title": "Neon Warlord",
         "artist": "FR MUSIC · 官方發行",
         "desc": "電子音樂 · 官方發行",
-        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
-        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887399/bbd819d1-0744-43ac-97af-365f544b6958.wav"
+        "cover": "https://i.ibb.co/Kn6XMXY/image-9a7539ed-a7dd-4277-870c-7c5b6f7961e1.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786936614/Neon_Warlord.mp3"
     },
     {
         "id": 2,
-        "title": "FR 精選單曲 02",
+        "title": "Riot Pulse",
         "artist": "FR MUSIC · 官方發行",
-        "desc": "沉浸曲風 · 獨家釋出",
-        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
-        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887396/4662a3ad-d31c-440d-9d3c-32b500f93610.wav"
+        "desc": "沉浸曲風 · 低音",
+        "cover": "https://i.ibb.co/5g6dQq6D/image-large-3ad8232c-9fca-462c-9372-02a61fb0fc2d.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786936812/Riot_Pulse.mp3"
     },
     {
         "id": 3,
-        "title": "FR 精選單曲 03",
+        "title": "FR 67",
         "artist": "FR MUSIC · 官方發行",
         "desc": "節奏重拍 · 獨家釋出",
-        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
+        "cover": "https://i.ibb.co/mFrvbCXz/image-large-45878a8f-f02f-4a4f-b439-77587ab041d6.jpg",
         "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887395/dad5a630-9abb-48a5-8007-bf96e4984d1c.wav"
     }
 ]

@@ -1,0 +1,34 @@
+[
+    {
+        "id": 0,
+        "title": "Dragon Circuit",
+        "artist": "FR MUSIC · 官方發行",
+        "desc": "電子賽博 · 最新發行",
+        "cover": "https://i.ibb.co/TBfLSnr2/image-f5a691be-d9df-4c8d-9f3c-a747e92f23db.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786890440/Dragon_Circuit.mp3"
+    },
+    {
+        "id": 1,
+        "title": "FR 精選單曲 01",
+        "artist": "FR MUSIC · 官方發行",
+        "desc": "電子音樂 · 官方發行",
+        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887399/bbd819d1-0744-43ac-97af-365f544b6958.wav"
+    },
+    {
+        "id": 2,
+        "title": "FR 精選單曲 02",
+        "artist": "FR MUSIC · 官方發行",
+        "desc": "沉浸曲風 · 獨家釋出",
+        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887396/4662a3ad-d31c-440d-9d3c-32b500f93610.wav"
+    },
+    {
+        "id": 3,
+        "title": "FR 精選單曲 03",
+        "artist": "FR MUSIC · 官方發行",
+        "desc": "節奏重拍 · 獨家釋出",
+        "cover": "https://i.ibb.co/VctJ2qpx/Background-Eraser-20260816-215827203.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786887395/dad5a630-9abb-48a5-8007-bf96e4984d1c.wav"
+    }
+]

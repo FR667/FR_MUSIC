@@ -305,7 +305,7 @@
             font-weight: 800;
             width: 32px;
             text-align: center;
-            color: #38bdf8; /* 全球榜專屬亮青色 */
+            color: #38bdf8;
         }
         .global12-item:nth-child(1) .global12-rank { color: #ffd700; }
         .global12-item:nth-child(2) .global12-rank { color: #c0c0c0; }
@@ -714,7 +714,7 @@
 
     <!-- 主要內容區 -->
     <main>
-        <!-- 1. 最上面：全球 NO.1 波全球播放量最高的歌（附觀看次數） -->
+        <!-- 1. 最上面：全球 NO.1 播放量最高的歌（附觀看次數） -->
         <div class="hero-banner" id="hero-banner-box">
             <img class="hero-cover" id="hero-cover" src="" alt="封面">
             <div class="hero-content">
@@ -734,13 +734,13 @@
             <div class="new-release-grid" id="new-release-container"></div>
         </section>
 
-        <!-- 3. 全球播放排行前 #12 (依真實熱門度順序排列、無重複) -->
+        <!-- 3. 全球播放排行前 #12 -->
         <section style="margin-bottom: 35px;">
             <h3 id="section-global12">🌍 全球播放排行前 #12</h3>
             <div class="global12-grid" id="global12-container"></div>
         </section>
 
-        <!-- 4. 你可能會喜歡 (隨機放或常撥音樂) -->
+        <!-- 4. 你可能會喜歡 -->
         <section style="margin-bottom: 35px;">
             <h3 id="section-you-may-like">💖 你可能會喜歡</h3>
             <div class="grid-section" id="grid-section-container"></div>
@@ -897,7 +897,27 @@
 
     <audio id="audio-player"></audio>
 
-    <script>
+    <!-- Firebase SDK 引入 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Firebase 設定
+        const firebaseConfig = {
+            apiKey: "AIzaSyBynyrWLi_RNJRuX7kzsXOE10FaPSwFbeM",
+            authDomain: "frmusic-998e3.firebaseapp.com",
+            databaseURL: "https://frmusic-998e3-default-rtdb.firebaseio.com",
+            projectId: "frmusic-998e3",
+            storageBucket: "frmusic-998e3.firebasestorage.app",
+            messagingSenderId: "727501043112",
+            appId: "1:727501043112:web:f7580c10fcfee8982dd99d",
+            measurementId: "G-B8T8C68R2K"
+        };
+
+        // 初始化 Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
         // ==========================================
         // 防止查看原始碼與保護機制
         // ==========================================
@@ -920,7 +940,7 @@
         // 音樂平台核心邏輯
         // ==========================================
         let playlist = [];
-        let playCounts = JSON.parse(localStorage.getItem('fr_play_counts')) || {};
+        let playCounts = {}; // 從 Firebase 讀取的全球播放次數
         let currentIndex = 0;
         let heroSongIndex = 0;
         let isPlaying = false;
@@ -1045,8 +1065,45 @@
         const playSvg = '<path d="M8 5v14l11-7z"/>';
         const pauseSvg = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
+        // 從 Firebase 獲取全球播放次數
+        async function fetchPlayCounts() {
+            try {
+                const dbRef = ref(db);
+                const snapshot = await get(child(dbRef, 'playCounts'));
+                if (snapshot.exists()) {
+                    playCounts = snapshot.val() || {};
+                } else {
+                    playCounts = {};
+                }
+            } catch (error) {
+                console.error('從 Firebase 讀取播放次數失敗:', error);
+                playCounts = {};
+            }
+        }
+
+        // 更新 Firebase 中的單曲播放次數 (將網址轉換為安全的 Firebase Key)
+        async function incrementGlobalPlayCount(songUrl) {
+            const safeKey = encodeURIComponent(songUrl).replace(/\./g, '%2E');
+            
+            try {
+                const currentCount = playCounts[songUrl] || 0;
+                const newCount = currentCount + 1;
+                playCounts[songUrl] = newCount;
+
+                // 寫入 Firebase 資料庫
+                const updates = {};
+                updates['/playCounts/' + safeKey] = newCount;
+                await update(ref(db), updates);
+
+                refreshUI();
+            } catch (error) {
+                console.error('更新 Firebase 播放次數失敗:', error);
+            }
+        }
+
         async function loadMusicData() {
             try {
+                await fetchPlayCounts();
                 const response = await fetch(JSON_URL);
                 playlist = await response.json();
                 
@@ -1113,11 +1170,11 @@
             closeSettings();
         }
 
-        function openSettings() { document.getElementById('settings-modal').classList.add('open'); }
-        function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
+        window.openSettings = function() { document.getElementById('settings-modal').classList.add('open'); }
+        window.closeSettings = function() { document.getElementById('settings-modal').classList.remove('open'); }
 
         // 搜尋功能
-        function onSearchInput(keyword) {
+        window.onSearchInput = function(keyword) {
             const dropdown = document.getElementById('search-dropdown');
             const resultsList = document.getElementById('search-results-list');
             resultsList.innerHTML = '';
@@ -1154,14 +1211,14 @@
             dropdown.classList.add('show');
         }
 
-        function selectSearchResult(index) {
+        window.selectSearchResult = function(index) {
             document.getElementById('search-dropdown').classList.remove('show');
             document.getElementById('search-input').value = '';
-            openModal();
-            playSong(index);
+            window.openModal();
+            window.playSong(index);
         }
 
-        function onLogoClick() {
+        window.onLogoClick = function() {
             const logoImg = document.getElementById('logo-img');
             logoImg.classList.add('rotate-animate');
             setTimeout(() => { logoImg.classList.remove('rotate-animate'); }, 800);
@@ -1217,7 +1274,7 @@
             });
         }
 
-        // 全球播放排行前 #12 (依真實播放量排序、不重複)
+        // 全球播放排行前 #12
         function renderGlobal12() {
             const container = document.getElementById('global12-container');
             if (!container) return;
@@ -1248,7 +1305,7 @@
             });
         }
 
-        // 你可能會喜歡 (隨機放或常撥音樂)
+        // 你可能會喜歡
         function renderYouMayLike() {
             const gridContainer = document.getElementById('grid-section-container');
             if (!gridContainer) return;
@@ -1305,7 +1362,7 @@
             });
         }
 
-        function playSong(index) {
+        window.playSong = function(index) {
             currentIndex = index;
             const song = playlist[currentIndex];
             if (!song) return;
@@ -1331,12 +1388,12 @@
             modalPlayIcon.innerHTML = pauseSvg;
         }
 
-        function togglePlayPause() {
+        window.togglePlayPause = function() {
             const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
             const t = translations[savedLang] || translations['zh-TW'];
 
             if (!audio.src && playlist.length > 0) {
-                playSong(0);
+                window.playSong(0);
                 return;
             }
             if (isPlaying) {
@@ -1354,31 +1411,31 @@
             }
         }
 
-        function nextSong() {
+        window.nextSong = function() {
             if (isShuffle) {
                 currentIndex = Math.floor(Math.random() * playlist.length);
             } else {
                 currentIndex = (currentIndex + 1) % playlist.length;
             }
-            playSong(currentIndex);
+            window.playSong(currentIndex);
         }
 
-        function prevSong() {
+        window.prevSong = function() {
             currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-            playSong(currentIndex);
+            window.playSong(currentIndex);
         }
 
-        function skipTime(seconds) {
+        window.skipTime = function(seconds) {
             if (!audio.duration) return;
             audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
         }
 
-        function toggleShuffle() {
+        window.toggleShuffle = function() {
             isShuffle = !isShuffle;
             document.querySelectorAll('.shuffle-trigger').forEach(b => b.classList.toggle('active', isShuffle));
         }
 
-        function toggleRepeat() {
+        window.toggleRepeat = function() {
             isRepeat = !isRepeat;
             document.querySelectorAll('.repeat-trigger').forEach(b => b.classList.toggle('active', isRepeat));
         }
@@ -1388,13 +1445,12 @@
                 const percent = (audio.currentTime / audio.duration) * 100;
                 updateProgressUI(percent);
                 
+                // 當播放超過 50% 時，記錄一次全球播放次數並寫入 Firebase
                 if (percent >= 50 && !hasCountedCurrentSong) {
                     hasCountedCurrentSong = true;
                     const song = playlist[currentIndex];
                     if (song) {
-                        playCounts[song.url] = (playCounts[song.url] || 0) + 1;
-                        localStorage.setItem('fr_play_counts', JSON.stringify(playCounts));
-                        refreshUI();
+                        incrementGlobalPlayCount(song.url);
                     }
                 }
 
@@ -1469,7 +1525,7 @@
         setupSeekBar('progress-bar');
         setupSeekBar('modal-progress-bar');
 
-        function setVolume(val) { audio.volume = val; }
+        window.setVolume = function(val) { audio.volume = val; }
 
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
@@ -1478,11 +1534,11 @@
         }
 
         audio.addEventListener('ended', () => {
-            if (isRepeat) { audio.play(); } else { nextSong(); }
+            if (isRepeat) { audio.play(); } else { window.nextSong(); }
         });
 
-        function openModal() { document.getElementById('now-playing-modal').classList.add('open'); }
-        function closeModal() { document.getElementById('now-playing-modal').classList.remove('open'); }
+        window.openModal = function() { document.getElementById('now-playing-modal').classList.add('open'); }
+        window.closeModal = function() { document.getElementById('now-playing-modal').classList.remove('open'); }
     </script>
 </body>
 </html>

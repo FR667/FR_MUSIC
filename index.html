@@ -102,7 +102,6 @@
             height: 16px;
         }
 
-        /* 熱門搜尋下拉選單 */
         .search-dropdown {
             position: absolute;
             top: calc(100% + 8px);
@@ -115,59 +114,23 @@
             display: none;
             z-index: 200;
             padding: 10px 0;
-            animation: fadeInDrop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes fadeInDrop {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .search-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-title {
-            padding: 6px 16px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .tag-item {
-            padding: 10px 16px;
-            font-size: 14px;
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-
-        .tag-item:hover {
-            background: var(--surface-hover);
-        }
+        .search-dropdown.show { display: block; }
+        .dropdown-title { padding: 6px 16px; font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+        .tag-item { padding: 10px 16px; font-size: 14px; color: var(--text-primary); cursor: pointer; transition: background 0.2s; }
+        .tag-item:hover { background: var(--surface-hover); }
 
         .settings-btn {
             background: none;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 10px;
             border-radius: 50%;
             transition: all 0.2s;
         }
-
-        .settings-btn:hover {
-            color: var(--text-primary);
-            background: var(--surface-hover);
-            transform: rotate(45deg);
-        }
+        .settings-btn:hover { color: var(--text-primary); background: var(--surface-hover); transform: rotate(45deg); }
 
         /* 主要內容區 */
         main {
@@ -178,119 +141,89 @@
             width: 100%;
         }
 
-        /* 英雄區：本地用戶最常聽的歌 */
+        /* 英雄區：用戶喜愛的音樂 (大卡片樣式) */
         .hero-banner {
-            background: linear-gradient(135deg, #1e1e1e 0%, #0c0c0c 100%);
+            background: linear-gradient(135deg, #2b0c11 0%, #120507 100%);
             border-radius: 24px;
-            padding: 36px 44px;
+            padding: 40px 50px;
             margin-bottom: 40px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid rgba(250, 36, 60, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            gap: 35px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-banner::before {
+        .hero-banner::after {
             content: '';
             position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 250px;
-            height: 250px;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
             background: var(--accent);
-            opacity: 0.08;
+            opacity: 0.12;
             border-radius: 50%;
-            filter: blur(60px);
+            filter: blur(70px);
             pointer-events: none;
         }
 
-        .hero-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-        }
-
-        .hero-banner h2 {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .most-played-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-
-        .most-played-card {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 16px;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .most-played-card:hover {
-            background: var(--surface-hover);
-            transform: translateY(-3px);
-            border-color: var(--accent);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-
-        .most-played-card img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+        .hero-cover {
+            width: 170px;
+            height: 170px;
+            border-radius: 16px;
             object-fit: cover;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            flex-shrink: 0;
         }
 
-        .most-played-info {
-            flex: 1;
-            min-width: 0;
-        }
+        .hero-content { flex: 1; }
 
-        .most-played-info .song-title {
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 3px;
-        }
-
-        .most-played-info .song-artist {
+        .hero-tag {
             font-size: 12px;
-            color: var(--text-secondary);
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .most-played-play {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+        .hero-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .hero-btn {
             background: var(--accent);
             color: #fff;
-            display: flex;
+            border: none;
+            padding: 11px 26px;
+            border-radius: 500px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(250, 36, 60, 0.4);
         }
 
-        .most-played-card:hover .most-played-play {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .hero-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        /* 區塊標題 */
         section h3 {
             font-size: 22px;
             margin-bottom: 20px;
@@ -328,33 +261,13 @@
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 14px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
 
-        .album-card .title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .album-card .title { font-size: 15px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .album-card .desc { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .album-card .desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* 全部歌曲清單區 */
-        .song-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
+        /* 全部歌曲清單 */
+        .song-list { display: flex; flex-direction: column; gap: 10px; }
         .song-item {
             display: flex;
             align-items: center;
@@ -363,61 +276,13 @@
             background-color: var(--surface-color);
             border-radius: 12px;
             border: 1px solid transparent;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s;
         }
-
-        .song-item:hover {
-            background-color: var(--surface-hover);
-            border-color: var(--border-color);
-            transform: translateX(4px);
-        }
-
-        .song-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex: 1;
-            cursor: pointer;
-        }
-
-        .song-thumb {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .song-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .song-artist {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .song-actions-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .fav-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .fav-btn:hover { color: var(--accent); background: rgba(250,36,60,0.1); }
-        .fav-btn.active { color: var(--accent); }
+        .song-item:hover { background-color: var(--surface-hover); border-color: var(--border-color); }
+        .song-info { display: flex; align-items: center; gap: 16px; flex: 1; cursor: pointer; }
+        .song-thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+        .song-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .song-artist { font-size: 13px; color: var(--text-secondary); }
 
         .action-btn {
             background: transparent;
@@ -430,13 +295,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
-        .action-btn:hover {
-            border-color: var(--text-primary);
-            background: var(--text-primary);
-            color: var(--bg-color);
-            transform: scale(1.05);
-        }
+        .action-btn:hover { border-color: var(--text-primary); background: var(--text-primary); color: var(--bg-color); }
 
         /* 底部常駐播放器 */
         .bottom-player {
@@ -445,7 +304,7 @@
             left: 0;
             width: 100%;
             height: 96px;
-            background: rgba(18, 18, 18, 0.92);
+            background: rgba(18, 18, 18, 0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border-color);
             display: flex;
@@ -453,78 +312,18 @@
             justify-content: space-between;
             padding: 0 28px;
             z-index: 90;
-            box-shadow: 0 -15px 35px rgba(0,0,0,0.5);
         }
 
-        .player-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            width: 300px;
-            cursor: pointer;
-        }
+        .player-left { display: flex; align-items: center; gap: 16px; width: 300px; cursor: pointer; }
+        .player-left img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+        .player-meta .title { font-size: 14px; font-weight: 600; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
+        .player-meta .status { font-size: 12px; color: var(--text-secondary); }
 
-        .player-left img {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .player-left:hover img {
-            transform: scale(1.05);
-        }
-
-        .player-meta .title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 210px;
-        }
-
-        .player-meta .status {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .player-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .player-controls {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-        }
-
-        .ctrl-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .ctrl-btn:hover {
-            color: var(--text-primary);
-            transform: scale(1.1);
-        }
-
-        .ctrl-btn.active {
-            color: var(--accent);
-        }
+        .player-center { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; max-width: 600px; }
+        .player-controls { display: flex; align-items: center; gap: 20px; }
+        .ctrl-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .ctrl-btn:hover { color: var(--text-primary); transform: scale(1.1); }
+        .ctrl-btn.active { color: var(--accent); }
 
         .play-pause-btn {
             background: var(--text-primary);
@@ -537,76 +336,25 @@
             justify-content: center;
             cursor: pointer;
             border: none;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            transition: all 0.2s;
         }
+        .play-pause-btn:hover { transform: scale(1.1); }
 
-        .play-pause-btn:hover {
-            transform: scale(1.12);
-            filter: brightness(1.1);
-        }
+        .progress-container { display: flex; align-items: center; gap: 12px; width: 100%; font-size: 11px; color: var(--text-secondary); }
+        .progress-bar { flex: 1; height: 5px; background: #4d4d4d; border-radius: 3px; position: relative; cursor: pointer; }
+        .progress-filled { position: absolute; top: 0; left: 0; height: 100%; background: var(--text-primary); border-radius: 3px; width: 0%; }
+        .progress-bar:hover .progress-filled { background: var(--accent); }
 
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
+        .player-right { width: 300px; display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+        .volume-slider { width: 100px; accent-color: var(--text-primary); cursor: pointer; }
 
-        .progress-bar {
-            flex: 1;
-            height: 5px;
-            background: #4d4d4d;
-            border-radius: 3px;
-            position: relative;
-            cursor: pointer;
-            transition: height 0.15s;
-        }
-
-        .progress-bar:hover {
-            height: 7px;
-        }
-
-        .progress-filled {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: var(--text-primary);
-            border-radius: 3px;
-            width: 0%;
-            transition: background 0.2s;
-        }
-
-        .progress-bar:hover .progress-filled {
-            background: var(--accent);
-        }
-
-        .player-right {
-            width: 300px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .volume-slider {
-            width: 110px;
-            accent-color: var(--text-primary);
-            cursor: pointer;
-        }
-
-        /* Apple CarPlay 風格全螢幕播放 Modal */
+        /* 全螢幕播放 Modal：動態高斯模糊專輯背景、滑順彈窗動畫 */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(40px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -614,31 +362,55 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+        /* 動態模糊背景層 */
+        .modal-blur-bg {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background-size: cover;
+            background-position: center;
+            filter: blur(55px) brightness(0.4);
+            transform: scale(1.1);
+            z-index: 1;
+            transition: background-image 0.6s ease;
         }
 
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
+        .modal-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .carplay-container {
             width: 90%;
-            max-width: 950px;
-            height: 560px;
-            background: rgba(22, 22, 25, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 900px;
+            background: rgba(18, 18, 22, 0.65);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 32px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding: 45px;
-            box-shadow: 0 30px 90px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            padding: 50px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             position: relative;
-            transform: scale(0.92) translateY(20px);
-            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
+            z-index: 10;
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .modal-overlay.open .carplay-container {
             transform: scale(1) translateY(0);
         }
@@ -647,7 +419,7 @@
             position: absolute;
             top: 24px;
             right: 24px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.1);
             border: none;
             color: var(--text-secondary);
             width: 36px;
@@ -658,30 +430,17 @@
             justify-content: center;
             font-size: 18px;
             cursor: pointer;
+            z-index: 20;
             transition: all 0.2s;
-            z-index: 10;
         }
-        .close-modal-btn:hover { 
-            background: rgba(255,255,255,0.2);
-            color: var(--text-primary); 
-            transform: scale(1.05);
-        }
+        .close-modal-btn:hover { background: rgba(255,255,255,0.25); color: var(--text-primary); }
 
-        /* CarPlay 左側：封面與基礎資訊 + 音訊視覺化特效 */
+        /* 左側封面區 */
         .carplay-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            justify-content: center;
             position: relative;
-        }
-
-        .carplay-cover-wrapper {
-            position: relative;
-            width: 240px;
-            height: 240px;
-            margin-bottom: 24px;
+            width: 320px;
+            height: 320px;
+            flex-shrink: 0;
         }
 
         .carplay-cover {
@@ -689,11 +448,9 @@
             height: 100%;
             border-radius: 20px;
             object-fit: cover;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
-        /* 音訊視覺化特效霸氣呈現 */
         .visualizer-bars {
             position: absolute;
             bottom: -15px;
@@ -701,119 +458,73 @@
             transform: translateX(-50%);
             display: flex;
             align-items: flex-end;
-            gap: 4px;
+            gap: 6px;
             height: 30px;
             pointer-events: none;
         }
+        .v-bar { width: 5px; background: var(--accent); border-radius: 3px; height: 8px; transition: height 0.15s ease; }
 
-        .v-bar {
-            width: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-            height: 6px;
-            transition: height 0.1s ease;
-        }
-
-        .carplay-meta {
-            width: 100%;
-        }
-
-        .carplay-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .carplay-song-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            text-align: left;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 320px;
-        }
-
-        .carplay-song-artist {
-            font-size: 14px;
-            color: var(--text-secondary);
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        /* CarPlay 右側：動態歌詞區 */
+        /* 右側資訊與控制區 */
         .carplay-right {
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 24px;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
-        .lyrics-container {
-            height: 100%;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 20px;
-            padding: 40px 0;
-            scroll-behavior: smooth;
+        .carplay-song-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            line-height: 1.2;
         }
 
-        .lyrics-container::-webkit-scrollbar { width: 0px; }
-
-        .lyric-line {
+        .carplay-song-artist {
             font-size: 16px;
             color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            line-height: 1.5;
+            margin-bottom: 35px;
         }
 
-        .lyric-line.active {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-shadow: 0 0 20px rgba(250, 36, 60, 0.5);
-            transform: scale(1.05);
-        }
-
-        /* CarPlay 控制盤 */
         .carplay-controls-area {
-            grid-column: span 2;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: -10px;
+            gap: 20px;
+            width: 100%;
         }
 
         .carplay-controls {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 32px;
+            gap: 24px;
         }
 
         #audio-player { display: none; }
 
+        /* 手機 RWD 適配避免破圖 */
         @media(max-width: 768px) {
+            header { padding: 15px 20px; }
+            .search-container { width: 200px; }
+            main { padding: 20px; }
+            .hero-banner { flex-direction: column; text-align: center; padding: 25px; gap: 20px; }
+            .hero-cover { width: 130px; height: 130px; }
+            .hero-tag { justify-content: center; }
             .carplay-container {
-                grid-template-columns: 1fr;
-                height: 90vh;
+                flex-direction: column;
+                width: 92%;
+                padding: 30px 20px;
+                gap: 25px;
+                max-height: 90vh;
                 overflow-y: auto;
-                padding: 24px;
             }
-            .carplay-right { display: none; }
-            .carplay-controls-area { grid-column: span 1; }
+            .carplay-left { width: 200px; height: 200px; }
+            .carplay-song-title { font-size: 22px; text-align: center; }
+            .carplay-song-artist { font-size: 14px; text-align: center; margin-bottom: 20px; }
+            .carplay-right { width: 100%; align-items: center; }
+            .carplay-controls { justify-content: center; gap: 16px; }
+            .player-right { display: none; }
+            .player-left { width: 220px; }
         }
     </style>
 </head>
@@ -830,53 +541,52 @@
             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" id="search-input" class="search-bar" placeholder="搜尋歌曲、曲風..." onfocus="showHotSearch()" onblur="hideHotSearch()" oninput="filterSongs(this.value)">
             
-            <!-- 熱門搜尋下拉選單 -->
             <div class="search-dropdown" id="search-dropdown">
                 <div class="dropdown-title">熱門曲風標籤</div>
-                <div class="tag-item" onclick="selectTag('電子賽博')"><span>⚡ 電子賽博</span></div>
-                <div class="tag-item" onclick="selectTag('電子音樂')"><span>🎧 電子音樂</span></div>
-                <div class="tag-item" onclick="selectTag('獨家釋出')"><span>🔥 獨家釋出</span></div>
-                <div class="tag-item" onclick="resetSearchFilter()" style="color:var(--accent);"><span>清除篩選條件</span></div>
+                <div class="tag-item" onclick="selectTag('電子賽博')">⚡ 電子賽博</div>
+                <div class="tag-item" onclick="selectTag('電子音樂')">🎧 電子音樂</div>
+                <div class="tag-item" onclick="selectTag('獨家釋出')">🔥 獨家釋出</div>
+                <div class="tag-item" onclick="resetSearchFilter()" style="color:var(--accent);">清除篩選條件</div>
             </div>
         </div>
 
         <button class="settings-btn" onclick="openSettings()" title="網站設定">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
     </header>
 
     <!-- 主要內容區 -->
     <main>
-        <!-- 英雄區：本地用戶最常聽的歌 -->
-        <div class="hero-banner">
-            <div class="hero-header">
-                <h2>🔥 本地用戶最常聽的歌</h2>
-            </div>
-            <div class="most-played-list" id="most-played-container">
-                <!-- 動態載入 -->
+        <!-- 英雄區：用戶喜愛的音樂焦點單曲 -->
+        <div class="hero-banner" id="hero-banner-box">
+            <img class="hero-cover" id="hero-cover" src="" alt="封面">
+            <div class="hero-content">
+                <div class="hero-tag">🔥 用戶喜愛的音樂焦點單曲</div>
+                <div class="hero-title" id="hero-title">載入中...</div>
+                <div class="hero-desc" id="hero-desc">享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。</div>
+                <button class="hero-btn" onclick="openModal(); playSong(heroSongIndex);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    立即播放
+                </button>
             </div>
         </div>
 
         <!-- 精選推薦區 -->
         <section style="margin-bottom: 40px;">
             <h3>精選推薦</h3>
-            <div class="grid-section" id="grid-section-container">
-                <!-- 動態載入 -->
-            </div>
+            <div class="grid-section" id="grid-section-container"></div>
         </section>
 
         <!-- 全部歌曲清單 -->
         <section>
             <h3>全部歌曲清單</h3>
-            <div class="song-list" id="song-list-container">
-                <!-- 動態載入 -->
-            </div>
+            <div class="song-list" id="song-list-container"></div>
         </section>
     </main>
 
     <!-- 底部常駐播放器 -->
     <div class="bottom-player">
-        <div class="player-left" onclick="openModal()" title="展開 Apple CarPlay 全螢幕播放">
+        <div class="player-left" onclick="openModal()" title="展開全螢幕播放">
             <img id="player-thumb" src="" alt="封面">
             <div class="player-meta">
                 <div class="title" id="player-title">尚未選擇歌曲</div>
@@ -893,13 +603,13 @@
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="skipTime(-10)" title="快退 10 秒">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="9.5" y="15.5" font-size="8" fill="currentColor" stroke="none">10</text></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
                 </button>
                 <button class="play-pause-btn" onclick="togglePlayPause()">
                     <svg id="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </button>
                 <button class="ctrl-btn" onclick="skipTime(10)" title="快轉 10 秒">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V4.5A7.5 7.5 0 0 1 19.5 12h-2A5.5 5.5 0 0 0 12 6.5V5m0 14v.5a7.5 7.5 0 0 1-7.5-7.5h2A5.5 5.5 0 0 0 12 17.5V19m-4-7l5-5v4h3v2h-3v4l-5-5z"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg>
                 </button>
                 <button class="ctrl-btn" onclick="nextSong()" title="下一首">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg>
@@ -923,74 +633,56 @@
         </div>
     </div>
 
-    <!-- Apple CarPlay 風格全螢幕播放 Modal -->
+    <!-- 全螢幕播放 Modal：動態模糊背景與質感設計 -->
     <div class="modal-overlay" id="now-playing-modal">
+        <div class="modal-blur-bg" id="modal-blur-bg"></div>
         <div class="carplay-container">
             <button class="close-modal-btn" onclick="closeModal()">×</button>
             
-            <!-- 左側：封面、視覺化與基本控制 -->
             <div class="carplay-left">
-                <div class="carplay-cover-wrapper">
-                    <img class="carplay-cover" id="modal-cover" src="" alt="封面">
-                    <!-- 音訊視覺化特效長條 -->
-                    <div class="visualizer-bars" id="visualizer-bars">
-                        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-                        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-                    </div>
+                <img class="carplay-cover" id="modal-cover" src="" alt="封面">
+                <div class="visualizer-bars" id="visualizer-bars">
+                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+                    <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
                 </div>
-                
-                <div class="carplay-meta">
-                    <div class="carplay-title-row">
-                        <div class="carplay-song-title" id="modal-song-title">歌曲名稱</div>
-                        <button class="fav-btn" id="modal-fav-btn" onclick="toggleFavoriteCurrent()" title="加入最愛">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+
+            <div class="carplay-right">
+                <div class="carplay-song-title" id="modal-song-title">歌曲名稱</div>
+                <div class="carplay-song-artist" id="modal-song-artist">演出者</div>
+
+                <div class="carplay-controls-area">
+                    <div class="progress-container" style="width: 100%;">
+                        <span id="modal-current-time">0:00</span>
+                        <div class="progress-bar" id="modal-progress-bar">
+                            <div class="progress-filled" id="modal-progress-filled"></div>
+                        </div>
+                        <span id="modal-duration-time">0:00</span>
+                    </div>
+
+                    <div class="carplay-controls">
+                        <button class="ctrl-btn shuffle-trigger" onclick="toggleShuffle()" title="隨機播放">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+                        </button>
+                        <button class="ctrl-btn" onclick="prevSong()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                        <button class="ctrl-btn" onclick="skipTime(-10)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.99 5V1L6 7l5.99 6v-4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
+                        <button class="play-pause-btn" style="width:48px; height:48px;" onclick="togglePlayPause()">
+                            <svg id="modal-play-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <button class="ctrl-btn" onclick="skipTime(10)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1l5.99 6L12 13v-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="8.5" y="15.5" font-size="7" fill="currentColor" stroke="none">10</text></svg></button>
+                        <button class="ctrl-btn" onclick="nextSong()"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg></button>
+                        <button class="ctrl-btn repeat-trigger" onclick="toggleRepeat()" title="單曲循環">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
                         </button>
                     </div>
-                    <div class="carplay-song-artist" id="modal-song-artist">演出者</div>
-                </div>
-            </div>
-
-            <!-- 右側：動態同步歌詞 -->
-            <div class="carplay-right">
-                <div class="lyrics-container" id="lyrics-container">
-                    <div class="lyric-line active">享受頂級音樂串流體驗</div>
-                    <div class="lyric-line">動態歌詞將隨音樂同步滾動</div>
-                    <div class="lyric-line">讓節奏與心跳同步共鳴</div>
-                </div>
-            </div>
-
-            <!-- 下方：進度與播放控制盤 -->
-            <div class="carplay-controls-area">
-                <div class="progress-container" style="width: 100%;">
-                    <span id="modal-current-time">0:00</span>
-                    <div class="progress-bar" id="modal-progress-bar">
-                        <div class="progress-filled" id="modal-progress-filled"></div>
-                    </div>
-                    <span id="modal-duration-time">0:00</span>
-                </div>
-
-                <div class="carplay-controls">
-                    <button class="ctrl-btn shuffle-trigger" onclick="toggleShuffle()" title="隨機播放">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-                    </button>
-                    <button class="ctrl-btn" onclick="prevSong()"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-                    <button class="ctrl-btn" onclick="skipTime(-10)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="9.5" y="15.5" font-size="8" fill="currentColor" stroke="none">10</text></svg></button>
-                    <button class="play-pause-btn" style="width:52px; height:52px;" onclick="togglePlayPause()">
-                        <svg id="modal-play-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <button class="ctrl-btn" onclick="skipTime(10)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5V4.5A7.5 7.5 0 0 1 19.5 12h-2A5.5 5.5 0 0 0 12 6.5V5m0 14v.5a7.5 7.5 0 0 1-7.5-7.5h2A5.5 5.5 0 0 0 12 17.5V19m-4-7l5-5v4h3v2h-3v4l-5-5z"/></svg></button>
-                    <button class="ctrl-btn" onclick="nextSong()"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM5 18l8.5-6L5 6v12z"/></svg></button>
-                    <button class="ctrl-btn repeat-trigger" onclick="toggleRepeat()" title="單曲循環">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 設定視窗 Modal -->
-    <div class="modal-overlay" id="settings-modal">
-        <div class="carplay-container" style="max-width: 420px; height: auto; display: block; text-align: left;">
+    <div class="modal-overlay" id="settings-modal" style="background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);">
+        <div class="carplay-container" style="max-width: 420px; display: block; text-align: left;">
             <button class="close-modal-btn" onclick="closeSettings()">×</button>
             <h3 style="margin-bottom: 20px;">網站設定</h3>
             
@@ -1022,15 +714,13 @@
         </div>
     </div>
 
-    <!-- 隱藏式 HTML5 音訊標籤 -->
     <audio id="audio-player"></audio>
 
-    <!-- JavaScript 邏輯 -->
     <script>
         let playlist = [];
         let playCounts = JSON.parse(localStorage.getItem('fr_play_counts')) || {};
-        let favorites = JSON.parse(localStorage.getItem('fr_favorites')) || [];
         let currentIndex = 0;
+        let heroSongIndex = 0;
         let isPlaying = false;
         let isShuffle = false;
         let isRepeat = false;
@@ -1046,6 +736,7 @@
         const playerStatus = document.getElementById('player-status');
         const playerThumb = document.getElementById('player-thumb');
         const modalCover = document.getElementById('modal-cover');
+        const modalBlurBg = document.getElementById('modal-blur-bg');
         const progressFilled = document.getElementById('progress-filled');
         const modalProgressFilled = document.getElementById('modal-progress-filled');
         const currentTimeEl = document.getElementById('current-time');
@@ -1056,13 +747,12 @@
         const playSvg = '<path d="M8 5v14l11-7z"/>';
         const pauseSvg = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
-        // 載入音樂資料
         async function loadMusicData() {
             try {
                 const response = await fetch(JSON_URL);
                 playlist = await response.json();
                 
-                renderMostPlayed();
+                setupHeroSection();
                 renderGrid(playlist);
                 renderList(playlist);
                 
@@ -1073,13 +763,13 @@
                     modalSongArtist.innerText = song.artist;
                     playerThumb.src = song.cover;
                     modalCover.src = song.cover;
+                    modalBlurBg.style.backgroundImage = `url('${song.cover}')`;
                 }
             } catch (error) {
                 console.error('無法從 GitHub 載入音樂資料:', error);
             }
         }
 
-        // 載入使用者設定
         function loadUserSettings() {
             const saved = JSON.parse(localStorage.getItem('fr_music_settings'));
             if (saved) {
@@ -1113,9 +803,7 @@
         function closeSettings() { document.getElementById('settings-modal').classList.remove('open'); }
 
         function showHotSearch() { document.getElementById('search-dropdown').classList.add('show'); }
-        function hideHotSearch() {
-            setTimeout(() => { document.getElementById('search-dropdown').classList.remove('show'); }, 200);
-        }
+        function hideHotSearch() { setTimeout(() => { document.getElementById('search-dropdown').classList.remove('show'); }, 200); }
         function selectTag(tagName) {
             document.getElementById('search-input').value = tagName;
             filterSongs(tagName);
@@ -1126,7 +814,6 @@
             renderList(playlist);
         }
 
-        // 旋轉 Logo 並跳回首頁
         function onLogoClick() {
             const logoImg = document.getElementById('logo-img');
             logoImg.classList.add('rotate-animate');
@@ -1136,39 +823,26 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 渲染英雄區：本地用戶最常聽的歌
-        function renderMostPlayed() {
-            const container = document.getElementById('most-played-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            // 根據 playCounts 排序
-            const sortedSongs = [...playlist].sort((a, b) => {
-                const countA = playCounts[a.url] || 0;
-                const countB = playCounts[b.url] || 0;
-                return countB - countA;
-            }).slice(0, 3); // 取前 3 首最常聽
-
-            if (sortedSongs.length === 0) return;
-
-            sortedSongs.forEach((song) => {
-                const originalIndex = playlist.findIndex(s => s.url === song.url);
-                container.innerHTML += `
-                    <div class="most-played-card" onclick="openModal(); playSong(${originalIndex});">
-                        <img src="${song.cover}" alt="${song.title}">
-                        <div class="most-played-info">
-                            <div class="song-title">${song.title}</div>
-                            <div class="song-artist">${song.artist}</div>
-                        </div>
-                        <div class="most-played-play">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        </div>
-                    </div>
-                `;
+        function setupHeroSection() {
+            if (playlist.length === 0) return;
+            let mostPlayedIndex = 0;
+            let maxCount = -1;
+            playlist.forEach((song, idx) => {
+                const cnt = playCounts[song.url] || 0;
+                if (cnt > maxCount) {
+                    maxCount = cnt;
+                    mostPlayedIndex = idx;
+                }
             });
+
+            heroSongIndex = mostPlayedIndex;
+            const song = playlist[heroSongIndex];
+
+            document.getElementById('hero-cover').src = song.cover;
+            document.getElementById('hero-title').innerText = song.title;
+            document.getElementById('hero-desc').innerText = song.desc || `享受無損純淨音質與沉浸式互動介面，立即聆聽 ${song.artist} 的精彩作品。`;
         }
 
-        // 渲染精選推薦網格
         function renderGrid(songsToRender) {
             const gridContainer = document.getElementById('grid-section-container');
             if (!gridContainer) return;
@@ -1186,7 +860,6 @@
             });
         }
 
-        // 渲染全部歌曲清單
         function renderList(songsToRender = playlist) {
             const listContainer = document.getElementById('song-list-container');
             if (!listContainer) return;
@@ -1199,7 +872,6 @@
             
             songsToRender.forEach((song) => {
                 const originalIndex = playlist.findIndex(s => s.url === song.url);
-                const isFav = favorites.includes(song.url);
                 listContainer.innerHTML += `
                     <div class="song-item">
                         <div class="song-info" onclick="openModal(); playSong(${originalIndex});">
@@ -1210,9 +882,6 @@
                             </div>
                         </div>
                         <div class="song-actions-group">
-                            <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${originalIndex}, event)" title="加入最愛">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                            </button>
                             <button class="action-btn" onclick="playSong(${originalIndex})">播放</button>
                         </div>
                     </div>
@@ -1225,48 +894,14 @@
             renderList(filtered);
         }
 
-        // 最愛收藏切換
-        function toggleFavorite(index, event) {
-            event.stopPropagation();
-            const song = playlist[index];
-            if (!song) return;
-
-            const favIndex = favorites.indexOf(song.url);
-            if (favIndex > -1) {
-                favorites.splice(favIndex, 1);
-            } else {
-                favorites.push(song.url);
-            }
-            localStorage.setItem('fr_favorites', JSON.stringify(favorites));
-            renderList(playlist);
-            updateModalFavBtn();
-        }
-
-        function toggleFavoriteCurrent() {
-            toggleFavorite(currentIndex, { stopPropagation: () => {} });
-        }
-
-        function updateModalFavBtn() {
-            const song = playlist[currentIndex];
-            const btn = document.getElementById('modal-fav-btn');
-            if (!song || !btn) return;
-            if (favorites.includes(song.url)) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        }
-
-        // 播放音樂核心
         function playSong(index) {
             currentIndex = index;
             const song = playlist[currentIndex];
             if (!song) return;
             
-            // 記錄播放次數
             playCounts[song.url] = (playCounts[song.url] || 0) + 1;
             localStorage.setItem('fr_play_counts', JSON.stringify(playCounts));
-            renderMostPlayed();
+            setupHeroSection();
 
             audio.src = song.url;
             audio.play();
@@ -1277,34 +912,11 @@
             modalSongArtist.innerText = song.artist;
             playerThumb.src = song.cover;
             modalCover.src = song.cover;
+            modalBlurBg.style.backgroundImage = `url('${song.cover}')`;
             playerStatus.innerText = "FR MUSIC 播放中";
             
             playIcon.innerHTML = pauseSvg;
             modalPlayIcon.innerHTML = pauseSvg;
-            updateModalFavBtn();
-            loadLyrics(song);
-        }
-
-        // 動態歌詞與特效模擬
-        function loadLyrics(song) {
-            const container = document.getElementById('lyrics-container');
-            if (!container) return;
-
-            // 示範動態歌詞結構（可根據歌曲自訂）
-            const mockLyrics = [
-                { time: 0, text: "（前奏響起，沉浸於純粹音樂空間）" },
-                { time: 5, text: `歡迎來到 FR MUSIC 頂級饗宴` },
-                { time: 12, text: `正在播放：${song.title}` },
-                { time: 20, text: "感受節奏在指尖與心跳之間流淌" },
-                { time: 35, text: "燈光漸暗，釋放靈魂深處的熱情" },
-                { time: 50, text: "這是一場無與倫比的聽覺革命" },
-                { time: 70, text: "跟隨旋律，探索未知的音樂宇宙" }
-            ];
-
-            container.innerHTML = '';
-            mockLyrics.forEach((l, idx) => {
-                container.innerHTML += `<div class="lyric-line ${idx === 0 ? 'active' : ''}" data-time="${l.time}">${l.text}</div>`;
-            });
         }
 
         function togglePlayPause() {
@@ -1356,7 +968,6 @@
             document.querySelectorAll('.repeat-trigger').forEach(b => b.classList.toggle('active', isRepeat));
         }
 
-        // 音訊進度與視覺化聯動
         audio.addEventListener('timeupdate', () => {
             if (audio.duration && !isDragging) {
                 const percent = (audio.currentTime / audio.duration) * 100;
@@ -1370,38 +981,14 @@
                 modalCurrentTimeEl.innerText = formattedCurrent;
                 modalDurationTimeEl.innerText = formattedDuration;
 
-                // 隨機跳動視覺化特效霸氣呈現
                 if (isPlaying) {
                     document.querySelectorAll('.v-bar').forEach(bar => {
                         const randomHeight = Math.floor(Math.random() * 24) + 6;
                         bar.style.height = randomHeight + 'px';
                     });
                 }
-
-                // 同步滾動歌詞
-                updateActiveLyric(audio.currentTime);
             }
         });
-
-        function updateActiveLyric(currentTime) {
-            const lines = document.querySelectorAll('.lyric-line');
-            let activeIndex = 0;
-            lines.forEach((line, idx) => {
-                const time = parseFloat(line.getAttribute('data-time') || 0);
-                if (currentTime >= time) {
-                    activeIndex = idx;
-                }
-            });
-
-            lines.forEach((line, idx) => {
-                if (idx === activeIndex) {
-                    line.classList.add('active');
-                    line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    line.classList.remove('active');
-                }
-            });
-        }
 
         function updateProgressUI(percent) {
             progressFilled.style.width = percent + '%';

@@ -276,6 +276,42 @@
 
         .album-card .title { font-size: 14px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .album-card .desc { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .album-card .play-count-tag { font-size: 11px; color: var(--accent); margin-top: 6px; font-weight: 500; }
+
+        /* 熱門前10名排行榜專區 */
+        .top10-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .top10-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface-color);
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .top10-item:hover { background: var(--surface-hover); border-color: var(--border-color); }
+        .top10-rank {
+            font-size: 18px;
+            font-weight: 800;
+            width: 28px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .top10-item:nth-child(1) .top10-rank { color: #ffd700; } /* 冠軍 金色 */
+        .top10-item:nth-child(2) .top10-rank { color: #c0c0c0; } /* 亞軍 銀色 */
+        .top10-item:nth-child(3) .top10-rank { color: #cd7f32; } /* 季軍 銅色 */
+
+        .top10-thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .top10-info { flex: 1; min-width: 0; }
+        .top10-title { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+        .top10-count { font-size: 11px; color: var(--accent); font-weight: 500; }
 
         /* 全部歌曲清單 */
         .song-list { display: flex; flex-direction: column; gap: 8px; }
@@ -294,6 +330,18 @@
         .song-thumb { width: 42px; height: 42px; border-radius: 6px; object-fit: cover; flex-shrink: 0; }
         .song-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .song-artist { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        .song-right-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+        .song-play-count {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
 
         .action-btn {
             background: transparent;
@@ -306,7 +354,6 @@
             cursor: pointer;
             transition: all 0.2s;
             flex-shrink: 0;
-            margin-left: 10px;
         }
         .action-btn:hover { border-color: var(--text-primary); background: var(--text-primary); color: var(--bg-color); }
 
@@ -536,7 +583,7 @@
 
         #audio-player { display: none; }
 
-        /* 手機版極致優化 (防止比例過大、破版) */
+        /* 手機版極致優化 */
         @media(max-width: 768px) {
             header { padding: 12px 16px; }
             .logo { font-size: 17px; }
@@ -561,6 +608,7 @@
 
             section h3 { font-size: 17px; margin-bottom: 12px; }
             .grid-section { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 30px; }
+            .top10-grid { grid-template-columns: 1fr; }
             .album-card { padding: 10px; border-radius: 12px; }
             .album-card .title { font-size: 13px; }
             .album-card .desc { font-size: 11px; }
@@ -569,9 +617,9 @@
             .song-thumb { width: 38px; height: 38px; }
             .song-title { font-size: 13px; }
             .song-artist { font-size: 11px; }
+            .song-play-count { display: none; } /* 手機版隱藏單曲清單中的點播次數文字以防擁擠 */
             .action-btn { padding: 5px 12px; font-size: 11px; }
 
-            /* 底部播放器手機排版 */
             .bottom-player { height: 76px; padding: 0 12px; }
             .player-left { width: 160px; gap: 10px; }
             .player-left img { width: 44px; height: 44px; border-radius: 6px; }
@@ -581,9 +629,8 @@
             .player-controls { gap: 12px; }
             .play-pause-btn { width: 32px; height: 32px; }
             .ctrl-btn svg { width: 16px; height: 16px; }
-            .player-right { display: none; } /* 手機隱藏音量條省空間 */
+            .player-right { display: none; }
 
-            /* 全螢幕 Modal 手機適配 */
             .carplay-container {
                 flex-direction: column;
                 width: 95%;
@@ -642,6 +689,11 @@
                 </button>
             </div>
         </div>
+
+        <section style="margin-bottom: 35px;">
+            <h3 id="section-top10">🔥 近期熱門前 10 首排行</h3>
+            <div class="top10-grid" id="top10-container"></div>
+        </section>
 
         <section style="margin-bottom: 35px;">
             <h3 id="section-featured">精選推薦</h3>
@@ -839,6 +891,7 @@
                 heroTag: "🔥 用戶喜愛的音樂焦點單曲",
                 heroDesc: "享受無損純淨音質與沉浸式互動介面，點擊下方按鈕立即啟動全新賽博風音樂饗宴。",
                 btnPlay: "立即播放",
+                sectionTop10: "🔥 近期熱門前 10 首排行",
                 sectionFeatured: "精選推薦",
                 sectionAllSongs: "全部歌曲清單",
                 playerReady: "準備就緒",
@@ -850,7 +903,8 @@
                 btnCancel: "取消",
                 btnSave: "儲存設定",
                 notFound: "找不到符合條件的歌曲",
-                btnPlayList: "播放"
+                btnPlayList: "播放",
+                playCountText: "點播次數"
             },
             'en': {
                 pageTitle: "FR MUSIC - Professional Music Platform",
@@ -860,6 +914,7 @@
                 heroTag: "🔥 Featured Spotlight Track",
                 heroDesc: "Enjoy lossless audio quality and an immersive interactive interface. Click below to start your musical journey.",
                 btnPlay: "Play Now",
+                sectionTop10: "🔥 Top 10 Trending Charts",
                 sectionFeatured: "Featured Recommendations",
                 sectionAllSongs: "All Songs",
                 playerReady: "Ready",
@@ -871,7 +926,8 @@
                 btnCancel: "Cancel",
                 btnSave: "Save Settings",
                 notFound: "No matching songs found",
-                btnPlayList: "Play"
+                btnPlayList: "Play",
+                playCountText: "Plays"
             },
             'ja': {
                 pageTitle: "FR MUSIC - プロフェッショナル音楽プラットフォーム",
@@ -881,6 +937,7 @@
                 heroTag: "🔥 おすすめの注目トラック",
                 heroDesc: "ロスレスの純粋な音質と没入型インタラクティブインターフェースをお楽しみください。",
                 btnPlay: "今すぐ再生",
+                sectionTop10: "🔥 直近のトレンドトップ10",
                 sectionFeatured: "おすすめの推薦",
                 sectionAllSongs: "すべての楽曲",
                 playerReady: "準備完了",
@@ -892,7 +949,8 @@
                 btnCancel: "キャンセル",
                 btnSave: "保存",
                 notFound: "一致する曲が見つかりませんでした",
-                btnPlayList: "再生"
+                btnPlayList: "再生",
+                playCountText: "再生回数"
             },
             'ko': {
                 pageTitle: "FR MUSIC - 전문 음악 플랫폼",
@@ -902,6 +960,7 @@
                 heroTag: "🔥 추천 스포트라이트 트랙",
                 heroDesc: "손실 없는 순수한 음질과 몰입형 인터페이스를 즐겨보세요. 아래 버튼을 클릭하여 시작하세요.",
                 btnPlay: "지금 재생",
+                sectionTop10: "🔥 인기 TOP 10 차트",
                 sectionFeatured: "추천 음원",
                 sectionAllSongs: "모든 노래 목록",
                 playerReady: "준비됨",
@@ -913,7 +972,8 @@
                 btnCancel: "취소",
                 btnSave: "설정 저장",
                 notFound: "일치하는 노래를 찾을 수 없습니다",
-                btnPlayList: "재생"
+                btnPlayList: "재생",
+                playCountText: "재생 횟수"
             }
         };
 
@@ -942,9 +1002,7 @@
                 const response = await fetch(JSON_URL);
                 playlist = await response.json();
                 
-                setupHeroSection();
-                renderGrid(playlist);
-                renderList(playlist);
+                refreshUI();
                 
                 if (playlist.length > 0 && !audio.src) {
                     const song = playlist[0];
@@ -958,6 +1016,13 @@
             } catch (error) {
                 console.error('無法載入音樂資料:', error);
             }
+        }
+
+        function refreshUI() {
+            setupHeroSection();
+            renderTop10();
+            renderGrid(playlist);
+            renderList(playlist);
         }
 
         function loadUserSettings() {
@@ -977,6 +1042,7 @@
             document.getElementById('hero-tag-text').innerText = t.heroTag;
             document.getElementById('hero-desc').innerText = t.heroDesc;
             document.getElementById('btn-play-now').innerText = t.btnPlay;
+            document.getElementById('section-top10').innerText = t.sectionTop10;
             document.getElementById('section-featured').innerText = t.sectionFeatured;
             document.getElementById('section-all-songs').innerText = t.sectionAllSongs;
             if(!isPlaying) { playerStatus.innerText = t.playerReady; }
@@ -985,6 +1051,7 @@
             document.getElementById('lbl-bgtheme').innerText = t.lblBgTheme;
             document.getElementById('btn-cancel').innerText = t.btnCancel;
             document.getElementById('btn-save').innerText = t.btnSave;
+            refreshUI();
         }
 
         loadUserSettings();
@@ -1043,18 +1110,55 @@
             document.getElementById('hero-desc').innerText = song.desc || t.heroDesc;
         }
 
+        // 渲染近期熱門前 10 首排行
+        function renderTop10() {
+            const container = document.getElementById('top10-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+
+            // 依照點播次數由高到低排序，取得前 10 名
+            const sortedSongs = [...playlist].sort((a, b) => {
+                const countA = playCounts[a.url] || 0;
+                const countB = playCounts[b.url] || 0;
+                return countB - countA;
+            }).slice(0, 10);
+
+            sortedSongs.forEach((song, idx) => {
+                const originalIndex = playlist.findIndex(s => s.url === song.url);
+                const count = playCounts[song.url] || 0;
+                container.innerHTML += `
+                    <div class="top10-item" onclick="openModal(); playSong(${originalIndex});">
+                        <div class="top10-rank">#${idx + 1}</div>
+                        <img src="${song.cover}" class="top10-thumb" alt="封面">
+                        <div class="top10-info">
+                            <div class="top10-title">${song.title}</div>
+                            <div class="top10-count">${t.playCountText}: ${count} 次</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         function renderGrid(songsToRender) {
             const gridContainer = document.getElementById('grid-section-container');
             if (!gridContainer) return;
             gridContainer.innerHTML = '';
             
+            const savedLang = (JSON.parse(localStorage.getItem('fr_music_settings')) || {}).language || 'zh-TW';
+            const t = translations[savedLang] || translations['zh-TW'];
+
             songsToRender.slice(0, 4).forEach((song) => {
                 const originalIndex = playlist.findIndex(s => s.url === song.url);
+                const count = playCounts[song.url] || 0;
                 gridContainer.innerHTML += `
                     <div class="album-card" onclick="openModal(); playSong(${originalIndex});">
                         <img src="${song.cover}" alt="${song.title}">
                         <div class="title">${song.title}</div>
                         <div class="desc">${song.desc}</div>
+                        <div class="play-count-tag">${t.playCountText}: ${count} 次</div>
                     </div>
                 `;
             });
@@ -1075,6 +1179,7 @@
             
             songsToRender.forEach((song) => {
                 const originalIndex = playlist.findIndex(s => s.url === song.url);
+                const count = playCounts[song.url] || 0;
                 listContainer.innerHTML += `
                     <div class="song-item">
                         <div class="song-info" onclick="openModal(); playSong(${originalIndex});">
@@ -1084,7 +1189,8 @@
                                 <div class="song-artist">${song.artist}</div>
                             </div>
                         </div>
-                        <div class="song-actions-group">
+                        <div class="song-right-group">
+                            <div class="song-play-count">${t.playCountText}: ${count} 次</div>
                             <button class="action-btn" onclick="playSong(${originalIndex})">${t.btnPlayList}</button>
                         </div>
                     </div>
@@ -1102,9 +1208,12 @@
             const song = playlist[currentIndex];
             if (!song) return;
             
+            // 累加點播次數並儲存到 localStorage
             playCounts[song.url] = (playCounts[song.url] || 0) + 1;
             localStorage.setItem('fr_play_counts', JSON.stringify(playCounts));
-            setupHeroSection();
+            
+            // 重新整理畫面上的點播次數與排行榜
+            refreshUI();
 
             audio.src = song.url;
             audio.play();

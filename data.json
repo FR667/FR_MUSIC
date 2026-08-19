@@ -55,4 +55,20 @@
         "cover": "https://i.ibb.co/LdBDyxsD/image-large-d16d5d39-6845-48d6-a40d-1afa274dba8e.jpg",
         "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1786964332/Fading_Home_1.mp3"
     }
+    {
+        "id": 7,
+        "title": "Fading Home",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/ZRn0QgDZ/2026-08-19-183150.png",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787136183/Forgotten_Skies.mp3"
+    },
+    {
+        "id": 5,
+        "title": "Fading Home",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/MyTHF8Fm/image-large-c90771bb-e31c-4948-b66b-bdb65b4d3417.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787136401/Forgotten_Skies_2.mp3"
+    }
 ]

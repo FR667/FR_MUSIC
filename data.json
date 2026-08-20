@@ -70,5 +70,21 @@
         "desc": "電音 · AI",
         "cover": "https://i.ibb.co/MyTHF8Fm/image-large-c90771bb-e31c-4948-b66b-bdb65b4d3417.jpg",
         "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787136401/Forgotten_Skies_2.mp3"
+    },
+        {
+        "id": 9,
+        "title": "Frosted Signal",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/1ftqb0KZ/image-large-de44d084-40a0-4625-861b-26797d7b2741.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787207887/Frosted_Signal.mp3"
+    },
+    {
+        "id": 10,
+        "title": "Frosted Signal 2",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/G392sWWx/image-large-13fd8262-5bf9-43bc-af51-759ac2b8e808.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787207933/Frosted_Signal_1.mp3"
     }
 ]

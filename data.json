@@ -87,4 +87,28 @@
         "cover": "https://i.ibb.co/G392sWWx/image-large-13fd8262-5bf9-43bc-af51-759ac2b8e808.jpg",
         "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787207933/Frosted_Signal_1.mp3"
     }
+    {
+        "id": 11,
+        "title": "Fading Echo",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/5WtYhpWy/image-large-d958521a-0580-41ee-b47e-1e664bf6c6ed.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787216728/Falling_Glass_Sky.mp3"
+    },
+    {
+        "id": 12,
+        "title": "Velvet Drop",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/Qvv0Qy7v/image-large-87f9f920-bf10-4b6c-83bd-d1107281a52f.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787216730/Places_We_Used_to_Hide.mp3"
+    },
+            {
+        "id": 13,
+        "title": "Electric Sky",
+        "artist": "FR MUSIC · SUNO AI發行",
+        "desc": "電音 · AI",
+        "cover": "https://i.ibb.co/Psxhvrk8/image-large-44e8f339-01ca-49e8-a9e5-8d2a26fcdaf0.jpg",
+        "url": "https://res.cloudinary.com/mwnbak3n/video/upload/v1787217134/Fading_Echo.mp3"
+    }
 ]
